@@ -7,11 +7,31 @@ NodeJS, VueJS, ORM
 ---
 
 ```
+sudo su postgres
+```
+
+```
+psql
+```
+
+```
 CREATE ROLE crm WITH CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD '123';
 ```
 
 ```
 CREATE DATABASE crmdb WITH OWNER crm;
+```
+
+```
+\q
+```
+
+```
+psql -U crm -d crmdb
+```
+
+```
+123
 ```
 
 ---
@@ -41,7 +61,7 @@ npm i
 ### Then intall nodemon
 
 ```
- npm i -g nodemon
+ npm i -D nodemon
 ```
 
 ### Finally run
@@ -53,7 +73,7 @@ npm run dev
 ### Show result
 
 ```
-http://localhost:3001
+http://localhost:8000
 ```
 
 ## Run the frontend

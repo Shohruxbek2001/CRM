@@ -1,17 +1,19 @@
 <template>
-  <h1 class="font-extrabold text-3xl mb-6">Home</h1>
-  <p class="mb-3">Name in store id: {{ name }}</p>
-  <input
-    v-model="newName"
-    type="text"
-    class="p-2 border border-gray-600 rounded mr-2"
-  />
-  <button
-    @click="saveName"
-    class="p-2 bg-indigo-600 rounded text-white hover:bg-indigo-500"
-  >
-    Save
-  </button>
+  <div>
+    <h1 class="font-extrabold text-3xl mb-6">Home</h1>
+    <p class="mb-3">Name in store id: {{ name }}</p>
+    <input
+      v-model="newName"
+      type="text"
+      class="p-2 border border-gray-600 rounded mr-2"
+    />
+    <button
+      @click="saveName"
+      class="p-2 bg-indigo-600 rounded text-white hover:bg-indigo-500"
+    >
+      Save
+    </button>
+  </div>
 </template>
 
 <script setup>
