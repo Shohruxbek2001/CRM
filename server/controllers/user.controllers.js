@@ -1,16 +1,16 @@
-// const { PrismaClient } = require("@prisma/client");
-// const bcrypt = require("bcrypt");
+const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcrypt");
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// const getAllUsers = async (req, res) => {
-//   try {
-//     const users = await prisma.user.findMany();
-//     res.status(200).json(users);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// };
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await prisma.users.findMany();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // const getOneUser = async (req, res) => {
 //   try {
@@ -69,10 +69,10 @@
 //   }
 // };
 
-// module.exports = {
-//   getAllUsers,
-//   getOneUser,
-//   createUser,
-//   updateUser,
-//   deleteUser,
-// };
+module.exports = {
+  getAllUsers,
+  // getOneUser,
+  // createUser,
+  // updateUser,
+  // deleteUser,
+};

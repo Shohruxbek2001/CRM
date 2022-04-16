@@ -6,3 +6,141 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model address {
+  id        String  @id @db.Uuid
+  name      String? @db.VarChar
+  region_id String  @db.Uuid
+  city_id   String  @db.Uuid
+  user_id   String  @db.Uuid
+  city      city    @relation(fields: [city_id], references: [id], onDelete: Cascade, map: "fk_city_id")
+  region    region  @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "fk_region_id")
+  users     users   @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_user_id")
+}
+
+model branches {
+  id      String    @id @db.Uuid
+  name    String    @db.VarChar
+  courses courses[]
+  rooms   rooms[]
+}
+
+model city {
+  id        String    @id @db.Uuid
+  name      String    @db.VarChar
+  region_id String    @db.Uuid
+  region    region    @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "fk_region_id")
+  address   address[]
+}
+
+model comments {
+  id      String @id @db.Uuid
+  rate    Float  @default(0)
+  content String @db.VarChar
+  user_id String @db.Uuid
+  users   users  @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_user_id")
+}
+
+model courses {
+  id                 String     @id @db.Uuid
+  name               String?    @db.VarChar
+  duration           Int
+  price_list_id      String     @db.Uuid
+  per_of_lesson_time Int
+  date_of_start      String?    @db.VarChar
+  branch_id          String     @db.Uuid
+  branches           branches   @relation(fields: [branch_id], references: [id], onDelete: Cascade, map: "fk_branch_id")
+  price_list         price_list @relation(fields: [price_list_id], references: [id], onDelete: Cascade, map: "fk_price_list_id")
+  groups             groups[]
+}
+
+model forecast {
+  id                String   @id @db.Uuid
+  name              String   @db.VarChar
+  forecast_arrived  Float?
+  forecast_students Int?
+  date_of_forecast  DateTime @db.Timestamp(6)
+}
+
+model groups {
+  id           String   @id @db.Uuid
+  name         String   @db.VarChar
+  days_in_week String   @db.VarChar
+  course_id    String   @db.Uuid
+  start_date   DateTime @db.Timestamp(6)
+  room_id      String   @db.Uuid
+  courses      courses  @relation(fields: [course_id], references: [id], onDelete: Cascade, map: "fk_course_id")
+  rooms        rooms    @relation(fields: [room_id], references: [id], onDelete: Cascade, map: "fk_room_id")
+  users        users[]
+}
+
+model parents {
+  id           String @id @db.Uuid
+  fullname     String @db.VarChar
+  phone_number String @db.VarChar
+  user_id      String @db.Uuid
+  users        users  @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_user_id")
+}
+
+model payment {
+  id              String   @id @db.Uuid
+  date_of_payment DateTime @db.Timestamp(6)
+  user_id         String   @db.Uuid
+  users           users    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_user_id")
+}
+
+model price_list {
+  id      String    @id @db.Uuid
+  price   Float
+  courses courses[]
+}
+
+model region {
+  id      String    @id @db.Uuid
+  name    String    @db.VarChar
+  address address[]
+  city    city[]
+}
+
+model roles {
+  id    String  @id @db.Uuid
+  name  String  @db.VarChar
+  users users[]
+}
+
+model rooms {
+  id        String   @id @db.Uuid
+  name      String   @db.VarChar
+  amount    Int
+  branch_id String   @db.Uuid
+  branches  branches @relation(fields: [branch_id], references: [id], onDelete: Cascade, map: "fk_branch_id")
+  groups    groups[]
+}
+
+model sertificate {
+  id      String @id @db.Uuid
+  number  String @unique @db.VarChar
+  user_id String @db.Uuid
+  users   users  @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_user_id")
+}
+
+model users {
+  id           String        @id @db.Uuid
+  firstname    String?       @db.VarChar
+  lastname     String?       @db.VarChar
+  phone_number String?       @db.VarChar
+  email        String        @db.VarChar
+  password     String        @db.VarChar
+  img          String?       @db.VarChar
+  created_at   DateTime      @db.Timestamp(6)
+  country_code String?       @db.VarChar
+  group_id     String        @db.Uuid
+  role_id      String        @db.Uuid
+  groups       groups        @relation(fields: [group_id], references: [id], onDelete: Cascade, map: "fk_group_id")
+  roles        roles         @relation(fields: [role_id], references: [id], onDelete: Cascade, map: "fk_role_id")
+  address      address[]
+  comments     comments[]
+  parents      parents[]
+  payment      payment[]
+  sertificate  sertificate[]
+}

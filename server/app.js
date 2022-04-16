@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // * Import Routes
 
-// const userRoutes = require("./routes/user.routes");
+const userRoutes = require("./routes/user.routes");
 
 // * Routes Middlewares
 
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 app.get("/", (req, res) => {
   res.send("Server is working...")
 })
