@@ -1,7 +1,7 @@
 <template>
   <div class="bg-cover bg-fixed w-100 h-screen" style="background-image: url('/src/assets/images/main-bg.jpg')">
     <div class="h-screen bg-slate-900/75 flex justify-center items-center big-wrapper">
-      <div class="form-wrapper w-3/12 bg-slate-900/50 p-10 rounded-xl backdrop-blur-sm">
+      <div class="form-wrapper xl:w-4/12 lg:w-5/12 md:w-6/12 bg-slate-900/50 p-10 rounded-xl backdrop-blur-sm">
         <div id="clock" class="text-9xl text-white text-center font-medium">00:00</div>
         <div id="fullDate" class="text-4xl text-white text-center font-medium my-5 mb-10 uppercase">weekday 00 Month 0000</div>
         <form>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed, effect } from 'vue'
+import { onMounted } from 'vue'
 import $ from 'jquery'
 const updateClock = () => {
   let currentTime = new Date()
