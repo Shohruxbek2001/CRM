@@ -18,7 +18,7 @@ const router = useRouter()
 const store = useStore()
 
 const name = computed(() => {
-  return store.state.user.name
+  return "Jack"
 })
 
 function back() {

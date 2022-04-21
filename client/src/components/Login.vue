@@ -4,27 +4,45 @@
       <div class="form-wrapper xl:w-4/12 lg:w-5/12 md:w-6/12 bg-slate-900/50 p-10 rounded-xl backdrop-blur-sm">
         <div id="clock" class="text-9xl text-white text-center font-medium">00:00</div>
         <div id="fullDate" class="text-4xl text-white text-center font-medium my-5 mb-10 uppercase">weekday 00 Month 0000</div>
-        <form>
+        <form @submit.prevent="onSubmit" :validation-schema="schema">
           <div class="mb-6">
-            <input
+            <!-- <input
               type="email"
               id="email"
               class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
               placeholder="email@email.com"
+              v-model="email"
               required
+            /> -->
+            <Field
+              name="email"
+              type="email"
+              placeholder="email@email.com"
+              v-model="email"
+              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
             />
+            <ErrorMessage name="email" class="error-feedback" />
           </div>
           <div class="mb-6">
-            <input
+            <!-- <input
               type="password"
               id="password"
               class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
               placeholder="password"
+              v-model="password"
               required
+            /> -->
+            <Field
+              name="password"
+              type="password"
+              placeholder="password"
+              v-model="password"
+              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
             />
+            <ErrorMessage name="password" class="error-feedback" />
           </div>
           <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
-            Submit
+            <svg v-show="isLoading" class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> Submit
           </button>
         </form>
       </div>
@@ -33,8 +51,15 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
 import $ from 'jquery'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import { useRouter } from 'vue-router'
+import * as yup from 'yup'
+
+const router = useRouter()
+
 const updateClock = () => {
   let currentTime = new Date()
   let currentMinutes = currentTime.getMinutes()
@@ -52,8 +77,45 @@ onMounted(() => {
   fullDate()
   setInterval(updateClock, 1000)
 })
+
+const email = ref('')
+const password = ref('')
+let isLoading = false
+
+const schema = yup.object().shape({
+  username: yup.string().required('Iltimos. Emailni kitiring!'),
+  password: yup.string().required('Iltimos. Parolni kitiring!'),
+})
+
+const onSubmit = () => {
+  isLoading = true
+  console.log(isLoading);
+  store.dispatch('api/login', user).then(
+    () => {
+      router.push('/')
+    },
+    (error) => {
+      isLoading = false
+      message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    }
+  )
+}
+//   axios
+//     .post('http://localhost:8000/login', {
+//       email: email,
+//       password: password,
+//     })
+//     .then((response) => {
+//       console.log(response.data)
+//       localStorage.setItem('token', response.data.token)
+//       console.log(localStorage.getItem('token'))
+//     })
+//     .finally(router.push('/'))
+// }
 </script>
 
 
 <style scoped>
 </style>
+
+// server login

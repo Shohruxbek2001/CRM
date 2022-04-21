@@ -1,0 +1,12 @@
+GET http://127.0.0.1:8000/api/roles
+###
+GET http://127.0.0.1:8000/api/roles/1409ac68-f0ad-4255-8258-e3f79499b56b
+###
+POST http://127.0.0.1:8000/api/roles HTTP/1.1
+content-type: application/json
+
+{
+    "name": "admin"
+}
+###
+DELETE http://127.0.0.1:8000/api/roles/1409ac68-f0ad-4255-8258-e3f79499b56b

@@ -17,25 +17,25 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+// import { computed, ref } from 'vue'
+// import { useStore } from 'vuex'
+// import { useRouter } from 'vue-router'
 
-const router = useRouter()
+// const router = useRouter()
 
-const store = useStore()
+// const store = useStore()
 
-const name = computed(() => {
-  return store.state.user.name
-})
+// const name = computed(() => {
+//   return store.state.user.name
+// })
 
-const newName = ref('')
+// const newName = ref('')
 
-function saveName() {
-  store.dispatch('saveName', newName.value)
-  newName.value = ''
-  router.push('/about')
-}
+// function saveName() {
+//   store.dispatch('saveName', newName.value)
+//   newName.value = ''
+//   router.push('/about')
+// }
 </script>
 
 <style>

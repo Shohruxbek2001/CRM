@@ -1,0 +1,15 @@
+GET http://127.0.0.1:8000/api/admins
+###
+GET http://127.0.0.1:8000/api/admins/8ac55cb9-b7d0-4ed3-b8a3-9a3619d0ca9a
+###
+POST http://127.0.0.1:8000/api/admins HTTP/1.1
+content-type: application/json
+
+{
+    "name": "admin",
+    "email": "admin123@man.com",
+    "password": "1231",
+    "role_id": "0f68a039-a2d5-4d41-8918-2730f2b57e78" // change this id
+}
+###
+DELETE http://127.0.0.1:8000/api/admins/8ac55cb9-b7d0-4ed3-b8a3-9a3619d0ca9a
