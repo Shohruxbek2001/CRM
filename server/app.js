@@ -37,12 +37,12 @@ app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await prisma.admins.findUnique({
       where: {
-        email: email._value,
+        email: email,
       },
     });
-    if (user && await bcrypt.compare(password._value, user.password)) {
+    if (user && await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
-        { user_id: user.id, email: email._value },
+        { user_id: user.id, email: email },
         process.env.ACCESS_TOKEN_SECRET,
         {
           expiresIn: "2h",

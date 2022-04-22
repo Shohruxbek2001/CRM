@@ -42,9 +42,10 @@
             <ErrorMessage name="password" class="error-feedback text-red-600 font-medium" />
           </div>
           <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
-             Submit
+             <span v-show="!isLoading">Submit</span>
+             <span v-show="isLoading">Loading...</span>
           </button>
-          <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg>
+          <!-- <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> -->
         </Form>
       </div>
     </div>
@@ -83,38 +84,27 @@ onMounted(() => {
 const email = ref('')
 const password = ref('')
 let isLoading = false
+let message = ""
 
 const schema = yup.object().shape({
   email: yup.string().required('Iltimos. Emailni kitiring!'),
   password: yup.string().required('Iltimos. Parolni kitiring!'),
 })
 
-const onSubmit = () => {
+const onSubmit = (user) => {
   isLoading = true
-  console.log(isLoading)
-  // store.dispatch('api/login', user).then(
-  //   () => {
-  //     router.push('/')
-  //   },
-  //   (error) => {
-  //     isLoading = false
-  //     message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-  //   }
-  // )
-  // router.push('/')
+  // console.log(isLoading)
+  // console.log(user);
+  store.dispatch('auth/login', user).then(
+    () => {
+      router.push('/')
+    },
+    (error) => {
+      isLoading = false
+      message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    }
+  )
 }
-//   axios
-//     .post('http://localhost:8000/login', {
-//       email: email,
-//       password: password,
-//     })
-//     .then((response) => {
-//       console.log(response.data)
-//       localStorage.setItem('token', response.data.token)
-//       console.log(localStorage.getItem('token'))
-//     })
-//     .finally(router.push('/'))
-// }
 </script>
 
 
