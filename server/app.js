@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const roleRoutes = require("./routes/role.routes");
 const adminRoutes = require("./routes/admin.routes");
 const regionRoutes = require("./routes/region.routes");
+const cityRoutes = require("./routes/city.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -29,6 +30,7 @@ const priceListRoutes = require("./routes/priceList.routes");
 app.use("/api/roles", roleRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/regions", regionRoutes);
+app.use("/api/cities", cityRoutes);
 app.use("/api/prices", priceListRoutes);
 
 app.post("/api/login", async (req, res) => {
