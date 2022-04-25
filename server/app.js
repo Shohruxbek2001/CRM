@@ -23,6 +23,7 @@ const roleRoutes = require("./routes/role.routes");
 const adminRoutes = require("./routes/admin.routes");
 const regionRoutes = require("./routes/region.routes");
 const cityRoutes = require("./routes/city.routes");
+const branchesRoutes = require("./routes/branches.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -31,6 +32,7 @@ app.use("/api/roles", roleRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/regions", regionRoutes);
 app.use("/api/cities", cityRoutes);
+app.use("/api/branches", branchesRoutes);
 app.use("/api/prices", priceListRoutes);
 
 app.post("/api/login", async (req, res) => {
@@ -41,7 +43,7 @@ app.post("/api/login", async (req, res) => {
         email: email,
       },
     });
-    if (user && await bcrypt.compare(password, user.password)) {
+    if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
         { user_id: user.id, email: email },
         process.env.ACCESS_TOKEN_SECRET,
