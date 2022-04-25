@@ -59,7 +59,7 @@ model forecast {
   name              String   @db.VarChar
   forecast_arrived  Float?
   forecast_students Int?
-  date_of_forecast  DateTime @db.Timestamp(6)
+  date_of_forecast  DateTime @db.Timestamp
 }
 
 model groups {
@@ -67,7 +67,7 @@ model groups {
   name         String   @db.VarChar
   days_in_week String   @db.VarChar
   course_id    String   @db.Uuid
-  start_date   DateTime @db.Timestamp(6)
+  start_date   DateTime @db.Timestamp
   room_id      String   @db.Uuid
   courses      courses  @relation(fields: [course_id], references: [id])
   rooms        rooms    @relation(fields: [room_id], references: [id])
@@ -84,7 +84,7 @@ model parents {
 
 model payment {
   id              String   @id @default(uuid()) @db.Uuid
-  date_of_payment DateTime @db.Timestamp(6)
+  date_of_payment DateTime @db.Timestamp
   user_id         String   @db.Uuid
   users           users    @relation(fields: [user_id], references: [id])
 }

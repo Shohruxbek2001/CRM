@@ -24,6 +24,7 @@ const adminRoutes = require("./routes/admin.routes");
 const regionRoutes = require("./routes/region.routes");
 const cityRoutes = require("./routes/city.routes");
 const branchesRoutes = require("./routes/branches.routes");
+const forecastsRoutes = require("./routes/forecast.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -33,6 +34,7 @@ app.use("/api/admins", adminRoutes);
 app.use("/api/regions", regionRoutes);
 app.use("/api/cities", cityRoutes);
 app.use("/api/branches", branchesRoutes);
+app.use("/api/forecasts", forecastsRoutes);
 app.use("/api/prices", priceListRoutes);
 
 app.post("/api/login", async (req, res) => {
