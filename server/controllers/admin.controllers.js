@@ -41,21 +41,21 @@ const createAdmin = async (req, res) => {
   }
 };
 
-// const updateAdmin = async (req, res) => {
-//   try {
-//     const body = req.body;
-//     const { id } = req.params;
-//     const Admin = await prisma.Admin.update({
-//       where: { id },
-//       data: {
-//         ...body
-//       },
-//     });
-//     res.status(200).json({ message: "Admin Updated!", Admin });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// };
+const updateAdmin = async (req, res) => {
+  try {
+    const body = req.body;
+    const { id } = req.params;
+    const Admin = await prisma.admins.update({
+      where: { id },
+      data: {
+        ...body
+      },
+    });
+    res.status(200).json({ message: "Admin Updated!", Admin });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 const deleteAdmin = async (req, res) => {
   try {
@@ -73,6 +73,6 @@ module.exports = {
   getAllAdmins,
   getOneAdmin,
   createAdmin,
-  // updateAdmin,
+  updateAdmin,
   deleteAdmin,
 };

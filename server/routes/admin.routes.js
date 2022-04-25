@@ -3,7 +3,7 @@ const {
   getAllAdmins,
   getOneAdmin,
   createAdmin,
-  // updateAdmin,
+  updateAdmin,
   deleteAdmin,
 } = require("../controllers/admin.controllers.js");
 
@@ -12,7 +12,7 @@ const router = Router();
 router.get("/", getAllAdmins);
 router.get("/:id", getOneAdmin);
 router.post("/", createAdmin);
-// router.put("/:id", updateAdmin);
+router.put("/:id", updateAdmin);
 router.delete("/:id", deleteAdmin);
 
 module.exports = router;

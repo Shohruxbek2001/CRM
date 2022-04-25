@@ -21,17 +21,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const roleRoutes = require("./routes/role.routes");
 const adminRoutes = require("./routes/admin.routes");
-const userRoutes = require("./routes/user.routes");
+const regionRoutes = require("./routes/region.routes");
+const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
 
 app.use("/api/roles", roleRoutes);
 app.use("/api/admins", adminRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/regions", regionRoutes);
+app.use("/api/prices", priceListRoutes);
 
-app.get('/api/all', (req, res) => {
-  res.send("Siz tizimdasiz!")
-})
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;

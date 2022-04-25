@@ -6,14 +6,6 @@
         <div id="fullDate" class="text-4xl text-white text-center font-medium my-5 mb-10 uppercase">weekday 00 Month 0000</div>
         <Form @submit="onSubmit" :validation-schema="schema">
           <div class="mb-6">
-            <!-- <input
-              type="email"
-              id="email"
-              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
-              placeholder="email@email.com"
-              v-model="email"
-              required
-            /> -->
             <Field
               name="email"
               type="email"
@@ -24,14 +16,6 @@
             <ErrorMessage name="email" class="error-feedback text-red-600 font-medium" />
           </div>
           <div class="mb-6">
-            <!-- <input
-              type="password"
-              id="password"
-              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
-              placeholder="password"
-              v-model="password"
-              required
-            /> -->
             <Field
               name="password"
               type="password"
@@ -42,10 +26,8 @@
             <ErrorMessage name="password" class="error-feedback text-red-600 font-medium" />
           </div>
           <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
-             <span v-show="!isLoading">Submit</span>
-             <span v-show="isLoading">Loading...</span>
+             Submit
           </button>
-          <!-- <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> -->
         </Form>
       </div>
     </div>
@@ -83,7 +65,6 @@ onMounted(() => {
 
 const email = ref('')
 const password = ref('')
-let isLoading = false
 let message = ""
 
 const schema = yup.object().shape({
@@ -92,15 +73,11 @@ const schema = yup.object().shape({
 })
 
 const onSubmit = (user) => {
-  isLoading = true
-  // console.log(isLoading)
-  // console.log(user);
   store.dispatch('auth/login', user).then(
     () => {
       router.push('/')
     },
     (error) => {
-      isLoading = false
       message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
     }
   )
@@ -110,5 +87,3 @@ const onSubmit = (user) => {
 
 <style scoped>
 </style>
-
-// server login

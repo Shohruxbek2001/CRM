@@ -37,21 +37,21 @@ const createRole = async (req, res) => {
   }
 };
 
-// const updateRole = async (req, res) => {
-//   try {
-//     const body = req.body;
-//     const { id } = req.params;
-//     const Role = await prisma.Role.update({
-//       where: { id },
-//       data: {
-//         ...body
-//       },
-//     });
-//     res.status(200).json({ message: "Role Updated!", Role });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// };
+const updateRole = async (req, res) => {
+  try {
+    const body = req.body;
+    const { id } = req.params;
+    const Role = await prisma.roles.update({
+      where: { id },
+      data: {
+        ...body
+      },
+    });
+    res.status(200).json({ message: "Role Updated!", Role });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 const deleteRole = async (req, res) => {
   try {
@@ -69,6 +69,6 @@ module.exports = {
   getAllRoles,
   getOneRole,
   createRole,
-  // updateRole,
+  updateRole,
   deleteRole,
 };
