@@ -26,6 +26,7 @@ const cityRoutes = require("./routes/city.routes");
 const branchesRoutes = require("./routes/branches.routes");
 const forecastsRoutes = require("./routes/forecast.routes");
 const roomsRoutes = require("./routes/rooms.routes");
+const coursesRoutes = require("./routes/courses.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -37,6 +38,7 @@ app.use("/api/cities", cityRoutes);
 app.use("/api/branches", branchesRoutes);
 app.use("/api/forecasts", forecastsRoutes);
 app.use("/api/rooms", roomsRoutes);
+app.use("/api/courses", coursesRoutes);
 app.use("/api/prices", priceListRoutes);
 
 app.post("/api/login", async (req, res) => {

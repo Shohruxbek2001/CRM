@@ -47,7 +47,7 @@ model courses {
   duration           Int
   price_list_id      String     @db.Uuid
   per_of_lesson_time Int
-  date_of_start      String?    @db.VarChar
+  date_of_start      DateTime   @db.Timestamp
   branch_id          String     @db.Uuid
   branches           branches   @relation(fields: [branch_id], references: [id])
   price_list         price_list @relation(fields: [price_list_id], references: [id])
