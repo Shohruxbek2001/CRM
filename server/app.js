@@ -27,6 +27,7 @@ const branchesRoutes = require("./routes/branches.routes");
 const forecastsRoutes = require("./routes/forecast.routes");
 const roomsRoutes = require("./routes/rooms.routes");
 const coursesRoutes = require("./routes/courses.routes");
+const groupsRoutes = require("./routes/groups.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -39,6 +40,7 @@ app.use("/api/branches", branchesRoutes);
 app.use("/api/forecasts", forecastsRoutes);
 app.use("/api/rooms", roomsRoutes);
 app.use("/api/courses", coursesRoutes);
+app.use("/api/groups", groupsRoutes);
 app.use("/api/prices", priceListRoutes);
 
 app.post("/api/login", async (req, res) => {
