@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/:pathMach(.*)*',
     name: 'NotFound',
-    component: NotFound
+    component: Home,
   }
 
 ]
