@@ -26,7 +26,7 @@
             <ErrorMessage name="password" class="error-feedback text-red-600 font-medium" />
           </div>
           <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
-             Submit
+            Submit
           </button>
         </Form>
       </div>
@@ -42,6 +42,8 @@ import store from '../store/index'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import * as yup from 'yup'
+import iziToast from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
 
 const router = useRouter()
 
@@ -65,7 +67,7 @@ onMounted(() => {
 
 const email = ref('')
 const password = ref('')
-let message = ""
+let message = ''
 
 const schema = yup.object().shape({
   email: yup.string().required('Iltimos. Emailni kitiring!'),
@@ -79,6 +81,10 @@ const onSubmit = (user) => {
     },
     (error) => {
       message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+      iziToast.error({
+        message: message,
+        position: 'topRight',
+      })
     }
   )
 }
