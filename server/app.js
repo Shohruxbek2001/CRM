@@ -51,13 +51,11 @@ app.use("/api/prices", priceListRoutes);
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    // console.log(email, password);
     const user = await prisma.admins.findUnique({
       where: {
         email: email,
       },
     });
-    // console.log(user);
     if (user && (await bcrypt.compare(password, user.password))) {
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "2h",

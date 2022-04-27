@@ -11,6 +11,7 @@
     "axios": "^0.26.1",
     "izitoast": "^1.4.0",
     "jquery": "^3.6.0",
+    "tw-elements": "^1.0.0-alpha12",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",
