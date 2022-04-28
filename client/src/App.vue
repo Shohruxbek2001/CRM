@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div v-if="!login">
+  <div v-else>
     <router-view/>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
     const store = useStore()
 
     let login = computed(() => {
-      return store.state.isLogin
+      return store.state.isLogin || (localStorage.getItem('user') !== null)
     })
 
     return {

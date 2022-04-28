@@ -46,6 +46,8 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    linkActiveClass: 'active',
+    linkExactActiveClass: 'active',
 })
 
 router.beforeEach((to, from, next) => {
@@ -54,6 +56,8 @@ router.beforeEach((to, from, next) => {
     const loggedIn = localStorage.getItem('user');
     if (authRequired && !loggedIn) {
         next('/login');
+    } else if (to.path === '/login' && loggedIn) {
+        next('/');
     } else {
         next();
     }

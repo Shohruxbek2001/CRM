@@ -29,7 +29,7 @@
           </div>
           <button type="submit"
                   class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
-            Submit
+            Kirish
           </button>
         </Form>
       </div>
@@ -43,7 +43,6 @@ import $ from 'jquery'
 import {ErrorMessage, Field, Form} from 'vee-validate'
 import {useRouter} from 'vue-router'
 import * as yup from 'yup'
-import {computed} from 'vue';
 import {useStore} from 'vuex'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
