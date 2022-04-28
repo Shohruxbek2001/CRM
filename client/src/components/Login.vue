@@ -1,31 +1,34 @@
 <template>
-  <div class="bg-cover bg-fixed w-100 h-screen" style="background-image: url('/src/assets/images/main-bg.jpg')">
+  <div class="bg-cover bg-fixed w-100 h-screen" style="background-image: url('./src/assets/images/main-bg.jpg')">
     <div class="h-screen bg-slate-900/75 flex justify-center items-center big-wrapper">
       <div class="form-wrapper xl:w-4/12 lg:w-5/12 md:w-6/12 bg-slate-900/50 p-10 rounded-xl backdrop-blur-sm">
         <div id="clock" class="text-9xl text-white text-center font-medium">00:00</div>
-        <div id="fullDate" class="text-4xl text-white text-center font-medium my-5 mb-10 uppercase">weekday 00 Month 0000</div>
+        <div id="fullDate" class="text-4xl text-white text-center font-medium my-5 mb-10 uppercase">weekday 00 Month
+          0000
+        </div>
         <Form @submit="onSubmit" :validation-schema="schema">
           <div class="mb-6">
             <Field
-              name="email"
-              type="email"
-              placeholder="email@email.com"
-              v-model="email"
-              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
+                name="email"
+                type="email"
+                placeholder="email@email.com"
+                v-model="email"
+                class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
             />
-            <ErrorMessage name="email" class="error-feedback text-red-600 font-medium" />
+            <ErrorMessage name="email" class="error-feedback text-red-600 font-medium"/>
           </div>
           <div class="mb-6">
             <Field
-              name="password"
-              type="password"
-              placeholder="password"
-              v-model="password"
-              class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
+                name="password"
+                type="password"
+                placeholder="password"
+                v-model="password"
+                class="bg-white/25 border border-white text-white text-xl placeholder:text-white outline-none rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
             />
-            <ErrorMessage name="password" class="error-feedback text-red-600 font-medium" />
+            <ErrorMessage name="password" class="error-feedback text-red-600 font-medium"/>
           </div>
-          <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
+          <button type="submit"
+                  class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">
             Submit
           </button>
         </Form>
@@ -35,17 +38,18 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import axios from 'axios'
+import {onMounted, ref} from 'vue'
 import $ from 'jquery'
-import store from '../store/index'
-import { Form, Field, ErrorMessage } from 'vee-validate'
-import { useRouter } from 'vue-router'
+import {ErrorMessage, Field, Form} from 'vee-validate'
+import {useRouter} from 'vue-router'
 import * as yup from 'yup'
+import {computed} from 'vue';
+import {useStore} from 'vuex'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
 const router = useRouter()
+const store = useStore()
 
 const updateClock = () => {
   let currentTime = new Date()
@@ -74,18 +78,23 @@ const schema = yup.object().shape({
   password: yup.string().required('Iltimos. Parolni kitiring!'),
 })
 
+function checkLogin(data) {
+  store.commit('setLogin', data)
+}
+
 const onSubmit = (user) => {
   store.dispatch('auth/login', user).then(
-    () => {
-      router.push('/')
-    },
-    (error) => {
-      message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-      iziToast.error({
-        message: message,
-        position: 'topRight',
-      })
-    }
+      () => {
+        router.push('/')
+        checkLogin(true)
+      },
+      (error) => {
+        message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        iziToast.error({
+          message: message,
+          position: 'topRight',
+        })
+      }
   )
 }
 </script>
