@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import TableItem from "./Table/TableItem.vue";
+import TableItem from "./Table/TableItemForComments.vue";
 
 export default {
   data() {

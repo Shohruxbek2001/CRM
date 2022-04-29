@@ -8,8 +8,8 @@ const store = createStore({
     state() {
         return {
             isLogin: false,
-            selectedPage: 'not select',
-            selectedChildPage: 'not select'
+            selectedPage: '',
+            selectedChildPage: ''
         }
     },
     mutations: {
