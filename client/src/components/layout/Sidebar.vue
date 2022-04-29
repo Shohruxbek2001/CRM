@@ -25,16 +25,15 @@
 import MenuItem from "./MenuItem.vue";
 
 export default {
-  name: "sidenavSecExample",
   data() {
     return {
       menus: [
-        {id: 1, url: "/", icon: "fa-pie-chart", name: "Обзор"},
-        {id: 2, url: "/prognoz", icon: "fa-magnifying-glass-plus", name: "Прогноз выгоды"},
-        {id: 3, url: "/uchet", icon: "fa-coins", name: "Бухгалтерский учет"},
-        {id: 4, url: "/tranzaksiya", icon: "fa-chart-column", name: "Сумма транзакций"},
-        {id: 5, url: "/udachi", icon: "fa-user-plus", name: "Удачи"},
-        {id: 6, url: "/doxod", icon: "fa-sack-dollar", name: "Доход"},
+        {id: 1, url: "/", icon: "fa-pie-chart", name: "Обзор", page: "abzor"},
+        {id: 2, url: "/prognoz", icon: "fa-magnifying-glass-plus", name: "Прогноз выгоды", page: "prognoz"},
+        {id: 3, url: "/uchet", icon: "fa-coins", name: "Бухгалтерский учет", page: "uchet"},
+        {id: 4, url: "/tranzaksiya", icon: "fa-chart-column", name: "Сумма транзакций", page: "tranzaksiya"},
+        {id: 5, url: "/udachi", icon: "fa-user-plus", name: "Удачи", page: "udachi"},
+        {id: 6, url: "/doxod", icon: "fa-sack-dollar", name: "Доход", page: "doxod"},
       ]
     }
   },

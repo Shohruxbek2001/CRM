@@ -5,6 +5,28 @@ const routes = [
         path: '/',
         name: 'Obzor',
         component: () => import("../components/pages/Main.vue"),
+        children: [
+            {
+                path: '/abzor/new-students',
+                name: 'NewStudents',
+                component: () => import("../components/pages/main_parts/NewStudents.vue"),
+            },
+            {
+                path: '/abzor/leave-students',
+                name: 'LeaveStudents',
+                component: () => import("../components/pages/main_parts/LeaveStudents.vue"),
+            },
+            {
+                path: '/abzor/students-comments',
+                name: 'StudentsComments',
+                component: () => import("../components/pages/main_parts/StudentsComments.vue"),
+            },
+            {
+                path: '/abzor/all-students',
+                name: 'AllStudents',
+                component: () => import("../components/pages/main_parts/AllStudents.vue"),
+            }
+        ]
     },
     {
         path: '/login',
@@ -45,9 +67,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
-    linkActiveClass: 'active',
-    linkExactActiveClass: 'active',
+    routes
 })
 
 router.beforeEach((to, from, next) => {
