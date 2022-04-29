@@ -13,7 +13,7 @@
       </div>
     </div>
   </th>
-  <td class="px-6 py-4">
+  <td class="p-4">
     <div class="ml-2 inline-block">
       <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
         {{ comment.name }}
@@ -23,7 +23,7 @@
       </p>
     </div>
   </td>
-  <td class="px-6 py-4">
+  <td class="p-4">
     <div class="ml-2 inline-block">
       <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
         {{ comment.date }}
@@ -33,12 +33,12 @@
       </p>
     </div>
   </td>
-  <td class="px-6 py-4">
+  <td class="p-5">
     <span class="bg-orange-500 px-4 text-white text-xs font-semibold mr-2 py-1.5 rounded-3xl dark:bg-blue-200 dark:text-blue-800">
       {{ comment.priority }}
     </span>
   </td>
-  <td class="px-6 py-4 text-right">
+  <td class="p-3 text-center">
     <i class="fa fa-ellipsis-vertical cursor-pointer"></i>
   </td>
 </template>
@@ -53,6 +53,5 @@ export default {
   }
 }
 </script>
-<style>
-
+<style scoped>
 </style>

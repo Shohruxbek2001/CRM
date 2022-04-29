@@ -52,5 +52,10 @@ export default {
 </script>
 
 <style scoped>
-
+.child-active {
+  border-color: red;
+}
+.child-active p {
+  color: red;
+}
 </style>

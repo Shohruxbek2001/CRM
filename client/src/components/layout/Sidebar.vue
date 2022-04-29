@@ -44,4 +44,11 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  border-left-width: 4px;
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+  border-color: rgb(229 231 235 / var(--tw-text-opacity));
+  background-color: rgb(31 41 55 / 0.3);
+}
 </style>
