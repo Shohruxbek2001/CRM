@@ -58,4 +58,7 @@ export default {
 .child-active p {
   color: red;
 }
+body {
+  overflow-x: hidden !important;
+}
 </style>
