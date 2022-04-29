@@ -1,6 +1,6 @@
 <template>
-  <router-link :to="menu.url" @click="changePage(menu.page)"
-               :class="{'active': page === menu.page || $router.currentRoute.value.path === menu.url}"
+  <router-link :to="menu.url" @click="changePage(menu.name)"
+               :class="{'active': page === menu.name || $router.currentRoute.value.path === menu.url}"
                class="flex items-center border-gray-900 text-sm py-4 px-6 h-12 overflow-hidden text-gray-500 text-ellipsis border-l-4 whitespace-nowrap hover:text-gray-200 hover:border-l-4 hover:border-gray-100 hover:bg-gray-800 transition duration-300 ease-in-out"
                data-mdb-ripple="true"
                data-mdb-ripple-color="primary"
