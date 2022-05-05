@@ -9,7 +9,8 @@ const store = createStore({
         return {
             isLogin: false,
             selectedPage: '',
-            selectedChildPage: ''
+            selectedChildPage: '',
+            admins: [],
         }
     },
     mutations: {
@@ -21,7 +22,10 @@ const store = createStore({
         },
         setSelectedPage(state, page) {
             state.selectedPage = page
-        }
+        },
+        setAdmins(state, data) {
+            state.admins = data
+        },
     },
 });
 export default store;

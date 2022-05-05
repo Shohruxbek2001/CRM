@@ -19,7 +19,7 @@
     <router-link to="/abzor/all-students" @click="changeChildPage('AllStudents')"
                  :class="{'child-active': childPage === 'AllStudents' || $router.currentRoute.value.path === '/abzor/all-students' }"
                  class="border-2 shadow rounded-lg p-3 text-center hover:shadow-lg">
-      <div class="text-lg m-3">Все студенты <p class="font-medium mt-6 font-semibold text-3xl">45</p></div>
+      <div class="text-lg m-3">Все студенты<p class="font-medium mt-6 font-semibold text-3xl">45</p></div>
     </router-link>
   </div>
   <div class="p-3">
@@ -29,7 +29,8 @@
 
 <script>
 import {useStore} from "vuex";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
+import UserService from "../../services/user.service.js"
 
 export default {
   setup() {
@@ -43,9 +44,22 @@ export default {
       store.commit('setSelectedChildPage', page)
     }
 
+    const admins = computed(() => {
+      return store.state.admins
+    })
+
+    const addAdminsInStore = () => {
+      UserService.getAllAdmins().then(response => {
+        store.commit('setAdmins', response.data)
+      })
+    }
+    onMounted(() => {
+      addAdminsInStore()
+    })
     return {
       childPage,
-      changeChildPage
+      changeChildPage,
+      admins
     }
   }
 }
@@ -55,9 +69,11 @@ export default {
 .child-active {
   border-color: red;
 }
+
 .child-active p {
   color: red;
 }
+
 body {
   overflow-x: hidden !important;
 }

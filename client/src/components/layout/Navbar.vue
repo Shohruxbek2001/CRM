@@ -3,7 +3,7 @@
     <div class="font-medium font-bold">{{ page }}</div>
     <div>
       <i class="fa fa-bell px-3 cursor-pointer hover:text-blue-600"></i>
-      <strong class="px-3 border-l-2 cursor-pointer hover:text-blue-600">Jackson</strong>
+      <strong class="px-3 border-l-2 cursor-pointer hover:text-blue-600 capitalize">{{ userInfo.user.name }}</strong>
       <a href="/login"><i class="fa fa-sign-out px-2 cursor-pointer hover:text-red-600"
                           @click="onLogout()"></i></a>
     </div>
@@ -20,6 +20,7 @@ export default {
     const store = useStore()
     const router = useRouter()
 
+    const userInfo = computed(() => JSON.parse(localStorage.getItem('user')))
     function checkLogin(data) {
       store.commit('setLogin', data)
     }
@@ -37,7 +38,8 @@ export default {
 
     return {
       page,
-      onLogout
+      onLogout,
+      userInfo
     }
   }
 }
