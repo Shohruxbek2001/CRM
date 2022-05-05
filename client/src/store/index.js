@@ -1,9 +1,11 @@
 import {createStore} from "vuex";
 import {auth} from "./auth.module";
+import {student} from "./student.module";
 
 const store = createStore({
     modules: {
         auth,
+        student
     },
     state() {
         return {
@@ -11,6 +13,7 @@ const store = createStore({
             selectedPage: '',
             selectedChildPage: '',
             admins: [],
+            students: []
         }
     },
     mutations: {
@@ -25,6 +28,9 @@ const store = createStore({
         },
         setAdmins(state, data) {
             state.admins = data
+        },
+        setStudents(state, data) {
+            state.students = data
         },
     },
 });

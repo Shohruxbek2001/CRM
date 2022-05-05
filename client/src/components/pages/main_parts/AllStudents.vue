@@ -1,3 +1,33 @@
+<script>
+import TableItem from "./Table/TableItemForStudents.vue";
+import {computed, onMounted} from "vue";
+import StudentService from "../../../services/student.service";
+import {useStore} from "vuex";
+
+export default {
+  setup() {
+    const store = useStore()
+    const students = computed(() => {
+      return store.state.students
+    })
+    const addStudentsInStore = () => {
+      StudentService.getAllStudents().then(data =>
+          store.commit('setStudents', data)
+      )
+    }
+    onMounted(() => {
+      addStudentsInStore()
+    })
+    return {
+      students
+    }
+  },
+  components: {
+    TableItem
+  }
+}
+</script>
+
 <template>
   <div class="grid grid-flow-row-dense gap-4 text-gray-400">
     <div class="col-span-2 border-2 shadow rounded-lg text-center">
@@ -24,27 +54,3 @@
     </div>
   </div>
 </template>
-<script>
-import TableItem from "./Table/TableItemForStudents.vue";
-
-export default {
-  data() {
-    return {
-      students: [
-        {
-          id: 1,
-          image: "https://mdbcdn.b-cdn.net/img/new/avatars/8.webp",
-          name: "Александр",
-          date: "2"
-        },
-      ]
-    }
-  },
-  components: {
-    TableItem
-  }
-}
-</script>
-<style scoped>
-
-</style>

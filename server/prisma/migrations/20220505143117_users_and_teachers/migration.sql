@@ -5,6 +5,7 @@ CREATE TABLE "address" (
     "region_id" UUID NOT NULL,
     "city_id" UUID NOT NULL,
     "user_id" UUID NOT NULL,
+    "teacher_id" UUID NOT NULL,
 
     CONSTRAINT "address_pkey" PRIMARY KEY ("id")
 );
@@ -32,6 +33,7 @@ CREATE TABLE "comments" (
     "rate" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "content" VARCHAR NOT NULL,
     "user_id" UUID NOT NULL,
+    "teacher_id" UUID NOT NULL,
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
 );
@@ -43,7 +45,7 @@ CREATE TABLE "courses" (
     "duration" INTEGER NOT NULL,
     "price_list_id" UUID NOT NULL,
     "per_of_lesson_time" INTEGER NOT NULL,
-    "date_of_start" VARCHAR,
+    "date_of_start" TIMESTAMP NOT NULL,
     "branch_id" UUID NOT NULL,
 
     CONSTRAINT "courses_pkey" PRIMARY KEY ("id")
@@ -55,7 +57,7 @@ CREATE TABLE "forecast" (
     "name" VARCHAR NOT NULL,
     "forecast_arrived" DOUBLE PRECISION,
     "forecast_students" INTEGER,
-    "date_of_forecast" TIMESTAMP(6) NOT NULL,
+    "date_of_forecast" TIMESTAMP NOT NULL,
 
     CONSTRAINT "forecast_pkey" PRIMARY KEY ("id")
 );
@@ -66,7 +68,7 @@ CREATE TABLE "groups" (
     "name" VARCHAR NOT NULL,
     "days_in_week" VARCHAR NOT NULL,
     "course_id" UUID NOT NULL,
-    "start_date" TIMESTAMP(6) NOT NULL,
+    "start_date" TIMESTAMP NOT NULL,
     "room_id" UUID NOT NULL,
 
     CONSTRAINT "groups_pkey" PRIMARY KEY ("id")
@@ -85,7 +87,7 @@ CREATE TABLE "parents" (
 -- CreateTable
 CREATE TABLE "payment" (
     "id" UUID NOT NULL,
-    "date_of_payment" TIMESTAMP(6) NOT NULL,
+    "date_of_payment" TIMESTAMP NOT NULL,
     "user_id" UUID NOT NULL,
 
     CONSTRAINT "payment_pkey" PRIMARY KEY ("id")
@@ -146,9 +148,24 @@ CREATE TABLE "users" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "country_code" VARCHAR,
     "group_id" UUID NOT NULL,
-    "role_id" UUID NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "teachers" (
+    "id" UUID NOT NULL,
+    "firstname" VARCHAR,
+    "lastname" VARCHAR,
+    "phone_number" VARCHAR,
+    "email" VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL,
+    "img" VARCHAR,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "country_code" VARCHAR,
+    "group_id" UUID NOT NULL,
+
+    CONSTRAINT "teachers_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -169,6 +186,9 @@ CREATE UNIQUE INDEX "sertificate_number_key" ON "sertificate"("number");
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "teachers_email_key" ON "teachers"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "admins_email_key" ON "admins"("email");
 
 -- AddForeignKey
@@ -181,10 +201,16 @@ ALTER TABLE "address" ADD CONSTRAINT "address_region_id_fkey" FOREIGN KEY ("regi
 ALTER TABLE "address" ADD CONSTRAINT "address_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "address" ADD CONSTRAINT "address_teacher_id_fkey" FOREIGN KEY ("teacher_id") REFERENCES "teachers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "city" ADD CONSTRAINT "city_region_id_fkey" FOREIGN KEY ("region_id") REFERENCES "region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "comments" ADD CONSTRAINT "comments_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "comments" ADD CONSTRAINT "comments_teacher_id_fkey" FOREIGN KEY ("teacher_id") REFERENCES "teachers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "courses" ADD CONSTRAINT "courses_branch_id_fkey" FOREIGN KEY ("branch_id") REFERENCES "branches"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -214,7 +240,7 @@ ALTER TABLE "sertificate" ADD CONSTRAINT "sertificate_user_id_fkey" FOREIGN KEY 
 ALTER TABLE "users" ADD CONSTRAINT "users_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "groups"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "users" ADD CONSTRAINT "users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "teachers" ADD CONSTRAINT "teachers_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "groups"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "admins" ADD CONSTRAINT "admins_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

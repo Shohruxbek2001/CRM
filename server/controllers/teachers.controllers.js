@@ -2,76 +2,75 @@ const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcrypt");
 const prisma = new PrismaClient();
 
-const getAllUsers = async (req, res) => {
+const getAllTeachers = async (req, res) => {
   try {
-    const users = await prisma.users.findMany();
-    res.status(200).json(users);
+    const teachers = await prisma.teachers.findMany();
+    res.status(200).json(teachers);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const getOneUser = async (req, res) => {
+const getOneTeacher = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await prisma.users.findUnique({
+    const teacher = await prisma.teachers.findUnique({
       where: { id: id },
     });
-    res.status(200).json(user);
+    res.status(200).json(teacher);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const createUser = async (req, res) => {
+const createTeacher = async (req, res) => {
   try {
     let body = req.body;
     body.password = bcrypt.hashSync(body.password, 10);
-    console.log(body)
-    const user = await prisma.users.create({
+    const teacher = await prisma.teachers.create({
       data: {
         ...body,
       },
     });
-    res.status(201).json({ message: "User Created!", user });
+    res.status(201).json({ message: "Teacher Created!", teacher });
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const updateUser = async (req, res) => {
+const updateTeacher = async (req, res) => {
   try {
     let body = req.body;
     body.password = bcrypt.hashSync(body.password, 10);
     const { id } = req.params;
-    const User = await prisma.users.update({
+    const Teacher = await prisma.teachers.update({
       where: { id },
       data: {
         ...body
       },
     });
-    res.status(200).json({ message: "User Updated!", User });
+    res.status(200).json({ message: "Teacher Updated!", Teacher });
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteTeacher = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await prisma.users.delete({
+    const teacher = await prisma.teachers.delete({
       where: { id },
     });
-    res.status(204).json({ message: "User Deleted!", user });
+    res.status(204).json({ message: "Teacher Deleted!", teacher });
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
 module.exports = {
-  getAllUsers,
-  getOneUser,
-  createUser,
-  updateUser,
-  deleteUser,
+  getAllTeachers,
+  getOneTeacher,
+  createTeacher,
+  updateTeacher,
+  deleteTeacher,
 };

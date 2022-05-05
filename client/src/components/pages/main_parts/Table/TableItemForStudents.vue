@@ -5,10 +5,10 @@
            alt="Avatar"/>
       <div class="ml-2 inline-block">
         <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
-          {{ student.name }}
+          {{ student.firstname }}
         </p>
         <p class="text-sm leading-5 text-gray-300 dark:text-gray-400">
-          {{ student.date }} день назад
+          {{ student.created_at }} день назад
         </p>
       </div>
     </div>
@@ -28,6 +28,3 @@ export default {
   }
 }
 </script>
-<style>
-
-</style>

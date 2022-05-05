@@ -1,3 +1,41 @@
+<script>
+import {useStore} from "vuex";
+import {computed} from "vue";
+
+export default {
+  setup() {
+    const store = useStore()
+
+    let childPage = computed(() => {
+      return store.state.selectedChildPage
+    })
+
+    const changeChildPage = (page) => {
+      store.commit('setSelectedChildPage', page)
+    }
+
+    return {
+      childPage,
+      changeChildPage
+    }
+  }
+}
+</script>
+
+<style scoped>
+.child-active {
+  border-color: red;
+}
+
+.child-active p {
+  color: red;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+</style>
+
 <template>
   <div class="grid grid-cols-4 gap-4 px-3 mb-5">
     <router-link to="/abzor/new-students" @click="changeChildPage('NewStudents')"
@@ -26,55 +64,3 @@
     <router-view/>
   </div>
 </template>
-
-<script>
-import {useStore} from "vuex";
-import {computed, onMounted} from "vue";
-import UserService from "../../services/user.service.js"
-
-export default {
-  setup() {
-    const store = useStore()
-
-    let childPage = computed(() => {
-      return store.state.selectedChildPage
-    })
-
-    const changeChildPage = (page) => {
-      store.commit('setSelectedChildPage', page)
-    }
-
-    const admins = computed(() => {
-      return store.state.admins
-    })
-
-    const addAdminsInStore = () => {
-      UserService.getAllAdmins().then(response => {
-        store.commit('setAdmins', response.data)
-      })
-    }
-    onMounted(() => {
-      addAdminsInStore()
-    })
-    return {
-      childPage,
-      changeChildPage,
-      admins
-    }
-  }
-}
-</script>
-
-<style scoped>
-.child-active {
-  border-color: red;
-}
-
-.child-active p {
-  color: red;
-}
-
-body {
-  overflow-x: hidden !important;
-}
-</style>

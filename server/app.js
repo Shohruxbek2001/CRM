@@ -32,6 +32,7 @@ const roomsRoutes = require("./routes/rooms.routes");
 const coursesRoutes = require("./routes/courses.routes");
 const groupsRoutes = require("./routes/groups.routes");
 const usersRoutes = require("./routes/user.routes");
+const teachersRoutes = require("./routes/teachers.routes");
 const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
@@ -46,23 +47,24 @@ app.use("/api/rooms", auth, roomsRoutes);
 app.use("/api/courses", auth, coursesRoutes);
 app.use("/api/groups", auth, groupsRoutes);
 app.use("/api/users", auth, usersRoutes);
+app.use("/api/teachers", auth, teachersRoutes);
 app.use("/api/prices", auth, priceListRoutes);
 
 app.post("/login", async (req, res) => {
     try {
         const {email, password} = req.body;
-        const user = await prisma.admins.findUnique({
+        const admin = await prisma.admins.findUnique({
             where: {
                 email: email,
             },
         });
-        if (user && (await bcrypt.compare(password, user.password))) {
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        if (admin && (await bcrypt.compare(password, admin.password))) {
+            const accessToken = jwt.sign(admin, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: "2h",
             });
-            const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+            const refreshToken = jwt.sign(admin, process.env.REFRESH_TOKEN_SECRET);
             return res.status(200).json({
-                user: user,
+                user: admin,
                 accessToken: accessToken,
                 refreshToken: refreshToken,
             });

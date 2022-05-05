@@ -58,8 +58,8 @@ const updateClock = () => {
 }
 const fullDate = () => {
   let now = new Date()
-  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  let days = ['Yak', 'Du', 'Se', 'Chor', 'Pay', 'Juma', 'Shanba']
+  const monthNames = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr']
   let date = days[now.getDay()] + ' ' + now.getDate() + ' ' + monthNames[now.getMonth()] + ' ' + now.getFullYear()
   $('#fullDate').text(date)
 }
@@ -70,7 +70,6 @@ onMounted(() => {
 
 const email = ref('')
 const password = ref('')
-let message = ''
 
 const schema = yup.object().shape({
   email: yup.string().required('Iltimos. Emailni kitiring!'),
@@ -88,9 +87,8 @@ const onSubmit = (user) => {
         checkLogin(true)
       },
       (error) => {
-        message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         iziToast.error({
-          message: message,
+          message: (error.response && error.response.data && error.response.data.message) || error.message || error.toString(),
           position: 'topRight',
         })
       }

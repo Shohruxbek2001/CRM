@@ -13,9 +13,11 @@ model address {
   region_id String  @db.Uuid
   city_id   String  @db.Uuid
   user_id   String  @db.Uuid
+  teacher_id   String  @db.Uuid
   city      city    @relation(fields: [city_id], references: [id])
   region    region  @relation(fields: [region_id], references: [id])
   users     users   @relation(fields: [user_id], references: [id])
+  teachers   teachers  @relation(fields: [teacher_id], references: [id])
 }
 
 model branches {
@@ -39,6 +41,8 @@ model comments {
   content String @db.VarChar
   user_id String @db.Uuid
   users   users  @relation(fields: [user_id], references: [id])
+  teacher_id String @db.Uuid
+  teachers   teachers  @relation(fields: [teacher_id], references: [id])
 }
 
 model courses {
@@ -72,6 +76,7 @@ model groups {
   courses      courses  @relation(fields: [course_id], references: [id])
   rooms        rooms    @relation(fields: [room_id], references: [id])
   users        users[]
+  teachers     teachers[]
 }
 
 model parents {
@@ -106,7 +111,6 @@ model roles {
   id     String   @id @default(uuid()) @db.Uuid
   name   String   @db.VarChar
   admins admins[]
-  users  users[]
 }
 
 model rooms {
@@ -136,14 +140,28 @@ model users {
   created_at   DateTime      @default(now())
   country_code String?       @db.VarChar
   group_id     String        @db.Uuid
-  role_id      String        @db.Uuid
   groups       groups        @relation(fields: [group_id], references: [id])
-  roles        roles         @relation(fields: [role_id], references: [id])
   address      address[]
   comments     comments[]
   parents      parents[]
   payment      payment[]
   sertificate  sertificate[]
+}
+
+model teachers {
+  id           String        @id @default(uuid()) @db.Uuid
+  firstname    String?       @db.VarChar
+  lastname     String?       @db.VarChar
+  phone_number String?       @db.VarChar
+  email        String        @unique @db.VarChar
+  password     String        @db.VarChar
+  img          String?       @db.VarChar
+  created_at   DateTime      @default(now())
+  country_code String?       @db.VarChar
+  group_id     String        @db.Uuid
+  groups       groups        @relation(fields: [group_id], references: [id])
+  address      address[]
+  comments     comments[]
 }
 
 model admins {
