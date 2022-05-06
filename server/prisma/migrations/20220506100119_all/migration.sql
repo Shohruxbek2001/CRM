@@ -75,16 +75,6 @@ CREATE TABLE "groups" (
 );
 
 -- CreateTable
-CREATE TABLE "parents" (
-    "id" UUID NOT NULL,
-    "fullname" VARCHAR NOT NULL,
-    "phone_number" VARCHAR NOT NULL,
-    "user_id" UUID NOT NULL,
-
-    CONSTRAINT "parents_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "payment" (
     "id" UUID NOT NULL,
     "date_of_payment" TIMESTAMP NOT NULL,
@@ -140,6 +130,8 @@ CREATE TABLE "users" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "gender" VARCHAR NOT NULL,
     "group_id" UUID NOT NULL,
+    "parent_fullname" VARCHAR NOT NULL,
+    "parent_phone_number" VARCHAR NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -215,9 +207,6 @@ ALTER TABLE "groups" ADD CONSTRAINT "groups_course_id_fkey" FOREIGN KEY ("course
 
 -- AddForeignKey
 ALTER TABLE "groups" ADD CONSTRAINT "groups_room_id_fkey" FOREIGN KEY ("room_id") REFERENCES "rooms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "parents" ADD CONSTRAINT "parents_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "payment" ADD CONSTRAINT "payment_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

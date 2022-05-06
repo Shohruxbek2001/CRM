@@ -79,14 +79,6 @@ model groups {
   teachers     teachers[]
 }
 
-model parents {
-  id           String @id @default(uuid()) @db.Uuid
-  fullname     String @db.VarChar
-  phone_number String @db.VarChar
-  user_id      String @db.Uuid
-  users        users  @relation(fields: [user_id], references: [id])
-}
-
 model payment {
   id              String   @id @default(uuid()) @db.Uuid
   date_of_payment DateTime @db.Timestamp
@@ -134,10 +126,11 @@ model users {
   created_at   DateTime      @default(now())
   gender       String        @db.VarChar
   group_id     String        @db.Uuid
+  parent_fullname String     @db.VarChar
+  parent_phone_number String @db.VarChar
   groups       groups        @relation(fields: [group_id], references: [id])
   address      address[]
   comments     comments[]
-  parents      parents[]
   payment      payment[]
   sertificate  sertificate[]
 }

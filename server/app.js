@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // * Import Routes
 
-const roleRoutes = require("./routes/role.routes");
 const adminRoutes = require("./routes/admin.routes");
 const regionRoutes = require("./routes/region.routes");
 const cityRoutes = require("./routes/city.routes");
@@ -37,7 +36,6 @@ const priceListRoutes = require("./routes/priceList.routes");
 
 // * Routes Middlewares
 
-app.use("/api/roles", auth, roleRoutes);
 app.use("/api/admins", auth, adminRoutes);
 app.use("/api/regions", auth, regionRoutes);
 app.use("/api/cities", auth, cityRoutes);

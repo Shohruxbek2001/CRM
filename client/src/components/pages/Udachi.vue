@@ -17,6 +17,8 @@ const email = ref('')
 const password = ref('')
 const gender = ref('')
 const group_id = ref('')
+const parent_fullname = ref('')
+const parent_phone_number = ref('')
 
 const groups = computed(() => {
   return store.state.groups
@@ -31,6 +33,8 @@ onMounted(() => {
 })
 
 const schema = yup.object().shape({
+  parent_fullname: yup.string().required('Iltimos. Ota-onaning ismini kitiring!'),
+  parent_phone_number: yup.string().required('Iltimos. Ota-onaning telefon raqamini kitiring!'),
   firstname: yup.string().required('Iltimos. Ismni kitiring!'),
   lastname: yup.string().required('Iltimos. Familiyani kitiring!'),
   email: yup.string().required('Iltimos. Emailni kitiring!'),
@@ -55,7 +59,6 @@ const onSubmit = (student) => {
       group_id: group_id.value,
       gender: gender.value
     }
-    console.log(student)
     store.dispatch('student/create', student).then(
         () => {
           iziToast.success({
@@ -141,7 +144,22 @@ const onSubmit = (student) => {
               </div>
             </div>
             <div>
-
+              <Field
+                  name="parent_fullname"
+                  type="text"
+                  placeholder="Ota-onaning ismini kiriting..."
+                  v-model="parent_fullname"
+                  class="border rounded block p-2 outline-0 mb-4 w-full"
+              />
+              <ErrorMessage name="parent_fullname" class="error-feedback text-red-600 font-medium"/>
+              <Field
+                  name="parent_phone_number"
+                  type="phone"
+                  placeholder="Ota-onaning telefon raqamini kiriting..."
+                  v-model="parent_phone_number"
+                  class="border rounded block p-2 outline-0 mb-4 w-full"
+              />
+              <ErrorMessage name="parent_phone_number" class="error-feedback text-red-600 font-medium"/>
             </div>
           </div>
           <div class="flex justify-end">
