@@ -13,7 +13,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="relative mt-10">
+    <ul class="relative mt-5">
       <li class="relative" v-for="menu of menus">
         <MenuItem :menu="menu"/>
       </li>
@@ -34,6 +34,10 @@ export default {
         {id: 4, url: "/tranzaksiya", icon: "fa-chart-column", name: "Сумма транзакций"},
         {id: 5, url: "/udachi", icon: "fa-user-plus", name: "Удачи"},
         {id: 6, url: "/doxod", icon: "fa-sack-dollar", name: "Доход"},
+        {id: 7, url: "/groups", icon: "fa-user-group", name: "Guruhlar"},
+        {id: 8, url: "/branches", icon: "fa-building", name: "Filiallar"},
+        {id: 9, url: "/courses", icon: "fa-book", name: "Kurslar"},
+        {id: 10, url: "/teachers", icon: "fa-chalkboard-user", name: "O'qituvchilar"},
       ]
     }
   },

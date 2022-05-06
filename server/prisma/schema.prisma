@@ -107,12 +107,6 @@ model region {
   city    city[]
 }
 
-model roles {
-  id     String   @id @default(uuid()) @db.Uuid
-  name   String   @db.VarChar
-  admins admins[]
-}
-
 model rooms {
   id        String   @id @default(uuid()) @db.Uuid
   name      String   @db.VarChar
@@ -131,14 +125,14 @@ model sertificate {
 
 model users {
   id           String        @id @default(uuid()) @db.Uuid
-  firstname    String?       @db.VarChar
-  lastname     String?       @db.VarChar
+  firstname    String        @db.VarChar
+  lastname     String        @db.VarChar
   phone_number String?       @db.VarChar
   email        String        @unique @db.VarChar
   password     String        @db.VarChar
   img          String?       @db.VarChar
   created_at   DateTime      @default(now())
-  country_code String?       @db.VarChar
+  gender       String        @db.VarChar
   group_id     String        @db.Uuid
   groups       groups        @relation(fields: [group_id], references: [id])
   address      address[]
@@ -157,7 +151,7 @@ model teachers {
   password     String        @db.VarChar
   img          String?       @db.VarChar
   created_at   DateTime      @default(now())
-  country_code String?       @db.VarChar
+  gender       String        @db.VarChar
   group_id     String        @db.Uuid
   groups       groups        @relation(fields: [group_id], references: [id])
   address      address[]
@@ -169,6 +163,5 @@ model admins {
   name     String @db.VarChar
   email    String @unique @db.VarChar
   password String @db.VarChar
-  role_id  String @db.Uuid
-  roles    roles  @relation(fields: [role_id], references: [id])
+  role     String @db.VarChar
 }

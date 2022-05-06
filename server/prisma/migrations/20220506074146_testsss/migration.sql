@@ -110,14 +110,6 @@ CREATE TABLE "region" (
 );
 
 -- CreateTable
-CREATE TABLE "roles" (
-    "id" UUID NOT NULL,
-    "name" VARCHAR NOT NULL,
-
-    CONSTRAINT "roles_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "rooms" (
     "id" UUID NOT NULL,
     "name" VARCHAR NOT NULL,
@@ -139,14 +131,14 @@ CREATE TABLE "sertificate" (
 -- CreateTable
 CREATE TABLE "users" (
     "id" UUID NOT NULL,
-    "firstname" VARCHAR,
-    "lastname" VARCHAR,
+    "firstname" VARCHAR NOT NULL,
+    "lastname" VARCHAR NOT NULL,
     "phone_number" VARCHAR,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
     "img" VARCHAR,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "country_code" VARCHAR,
+    "gender" VARCHAR NOT NULL,
     "group_id" UUID NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
@@ -162,7 +154,7 @@ CREATE TABLE "teachers" (
     "password" VARCHAR NOT NULL,
     "img" VARCHAR,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "country_code" VARCHAR,
+    "gender" VARCHAR NOT NULL,
     "group_id" UUID NOT NULL,
 
     CONSTRAINT "teachers_pkey" PRIMARY KEY ("id")
@@ -174,7 +166,7 @@ CREATE TABLE "admins" (
     "name" VARCHAR NOT NULL,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
-    "role_id" UUID NOT NULL,
+    "role" VARCHAR NOT NULL,
 
     CONSTRAINT "admins_pkey" PRIMARY KEY ("id")
 );
@@ -241,6 +233,3 @@ ALTER TABLE "users" ADD CONSTRAINT "users_group_id_fkey" FOREIGN KEY ("group_id"
 
 -- AddForeignKey
 ALTER TABLE "teachers" ADD CONSTRAINT "teachers_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "groups"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "admins" ADD CONSTRAINT "admins_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -13,7 +13,8 @@ const store = createStore({
             selectedPage: '',
             selectedChildPage: '',
             admins: [],
-            students: []
+            students: [],
+            groups: []
         }
     },
     mutations: {
@@ -32,6 +33,9 @@ const store = createStore({
         setStudents(state, data) {
             state.students = data
         },
+        setGroups(state, data) {
+            state.groups = data
+        }
     },
 });
 export default store;

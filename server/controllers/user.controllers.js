@@ -25,12 +25,11 @@ const getOneUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    let body = req.body;
-    body.password = bcrypt.hashSync(body.password, 10);
-    console.log(body)
+    const body = req.body;
+    body.password = bcrypt.hashSync(body.password, 10)
     const user = await prisma.users.create({
       data: {
-        ...body,
+        ...body
       },
     });
     res.status(201).json({ message: "User Created!", user });
