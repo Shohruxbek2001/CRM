@@ -37,8 +37,7 @@ export default {
         {id: 7, url: "/groups", icon: "fa-user-group", name: "Guruhlar"},
         {id: 8, url: "/branches", icon: "fa-building", name: "Filiallar"},
         {id: 9, url: "/courses", icon: "fa-book", name: "Kurslar"},
-        {id: 10, url: "/teachers", icon: "fa-chalkboard-user", name: "O'qituvchilar"},
-        {id: 11, url: "/address", icon: "fa-home", name: "Yashash manzillar"},
+        {id: 10, url: "/teachers", icon: "fa-chalkboard-user", name: "O'qituvchilar"}
       ]
     }
   },

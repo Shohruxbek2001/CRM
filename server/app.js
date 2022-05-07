@@ -23,8 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // * Import Routes
 
 const adminRoutes = require("./routes/admin.routes");
-const regionRoutes = require("./routes/region.routes");
-const cityRoutes = require("./routes/city.routes");
+const addressRoutes = require("./routes/address.routes");
 const branchesRoutes = require("./routes/branches.routes");
 const forecastsRoutes = require("./routes/forecast.routes");
 const roomsRoutes = require("./routes/rooms.routes");
@@ -37,8 +36,7 @@ const priceListRoutes = require("./routes/priceList.routes");
 // * Routes Middlewares
 
 app.use("/api/admins", auth, adminRoutes);
-app.use("/api/regions", auth, regionRoutes);
-app.use("/api/cities", auth, cityRoutes);
+app.use("/api/address", auth, addressRoutes);
 app.use("/api/branches", auth, branchesRoutes);
 app.use("/api/forecasts", auth, forecastsRoutes);
 app.use("/api/rooms", auth, roomsRoutes);

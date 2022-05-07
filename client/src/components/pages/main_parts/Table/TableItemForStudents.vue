@@ -8,7 +8,7 @@
           {{ student.firstname }}
         </p>
         <p class="text-sm leading-5 text-gray-300 dark:text-gray-400">
-          ro'yhatdan o'tgan sana: {{ student.created_at.replace('T0', " ").slice(0, student.created_at.indexOf('.') - 1) }}
+          ro'yhatdan o'tgan sana: {{ student.created_at.replace('T', " ").slice(0, student.created_at.indexOf('.')) }}
         </p>
       </div>
     </div>

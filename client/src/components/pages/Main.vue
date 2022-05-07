@@ -1,41 +1,3 @@
-<script>
-import {useStore} from "vuex";
-import {computed} from "vue";
-
-export default {
-  setup() {
-    const store = useStore()
-
-    let childPage = computed(() => {
-      return store.state.selectedChildPage
-    })
-
-    const changeChildPage = (page) => {
-      store.commit('setSelectedChildPage', page)
-    }
-
-    return {
-      childPage,
-      changeChildPage
-    }
-  }
-}
-</script>
-
-<style scoped>
-.child-active {
-  border-color: red;
-}
-
-.child-active p {
-  color: red;
-}
-
-body {
-  overflow-x: hidden !important;
-}
-</style>
-
 <template>
   <div class="grid grid-cols-4 gap-4 px-3 mb-5">
     <router-link to="/abzor/new-students" @click="changeChildPage('NewStudents')"
@@ -57,10 +19,53 @@ body {
     <router-link to="/abzor/all-students" @click="changeChildPage('AllStudents')"
                  :class="{'child-active': childPage === 'AllStudents' || $router.currentRoute.value.path === '/abzor/all-students' }"
                  class="border-2 shadow rounded-lg p-3 text-center hover:shadow-lg">
-      <div class="text-lg m-3">Все студенты<p class="font-medium mt-6 font-semibold text-3xl">45</p></div>
+      <div class="text-lg m-3">Все студенты<p class="font-medium mt-6 font-semibold text-3xl">{{ students.length }}</p></div>
     </router-link>
   </div>
   <div class="p-3">
     <router-view/>
   </div>
 </template>
+
+<script>
+import {useStore} from "vuex";
+import {computed} from "vue";
+
+export default {
+  setup() {
+    const store = useStore()
+
+    let childPage = computed(() => {
+      return store.state.selectedChildPage
+    })
+
+    let students = computed(() => {
+      return store.state.students
+    })
+
+    const changeChildPage = (page) => {
+      store.commit('setSelectedChildPage', page)
+    }
+
+    return {
+      childPage,
+      changeChildPage,
+      students
+    }
+  }
+}
+</script>
+
+<style scoped>
+.child-active {
+  border-color: red;
+}
+
+.child-active p {
+  color: red;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+</style>

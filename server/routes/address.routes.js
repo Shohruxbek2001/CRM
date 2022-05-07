@@ -1,18 +1,18 @@
 const { Router } = require("express");
 const {
-  getAllRegions,
-  getOneRegion,
-  createRegion,
-  updateRegion,
-  deleteRegion,
+  getAllAddress,
+  getOneAddress,
+  createAddress,
+  updateAddress,
+  deleteAddress,
 } = require("../controllers/address.controllers.js");
 
 const router = Router();
 
-router.get("/", getAllRegions);
-router.get("/:id", getOneRegion);
-router.post("/", createRegion);
-router.put("/:id", updateRegion);
-router.delete("/:id", deleteRegion);
+router.get("/", getAllAddress);
+router.get("/:id", getOneAddress);
+router.post("/", createAddress);
+router.put("/:id", updateAddress);
+router.delete("/:id", deleteAddress);
 
 module.exports = router;

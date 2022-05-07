@@ -3,19 +3,19 @@ import authHeader from './auth-header.js';
 
 const API_URL = 'http://localhost:8000/api/';
 
-class RegionService {
-    getAllRegions() {
-        return axios.get(API_URL + 'regions', {headers: authHeader()}).then(response => {
+class AddressService {
+    getAllAddress() {
+        return axios.get(API_URL + 'address', {headers: authHeader()}).then(response => {
             return response.data;
         });
     }
 
-    createRegion(data) {
-        return axios.post(API_URL + 'regions', {...data}, {headers: authHeader()}).then(response => {
+    createAddress(data) {
+        return axios.post(API_URL + 'address', {...data}, {headers: authHeader()}).then(response => {
                 return response.data
             }
         )
     }
 }
 
-export default new RegionService();
+export default new AddressService();
