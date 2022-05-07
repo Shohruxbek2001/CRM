@@ -5,7 +5,7 @@ const {
   createRegion,
   updateRegion,
   deleteRegion,
-} = require("../controllers/region.controllers.js");
+} = require("../controllers/address.controllers.js");
 
 const router = Router();
 
