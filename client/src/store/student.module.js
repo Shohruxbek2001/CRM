@@ -12,6 +12,16 @@ export const student = {
           return Promise.reject(error);
         }
       );
+    },
+    get({ commit }) {
+      return StudentService.getAllStudents().then(
+        student => {
+          return Promise.resolve(student);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
     }
   },
 

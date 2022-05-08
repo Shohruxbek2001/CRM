@@ -45,7 +45,7 @@
               </div>
               <select name="group" class="border p-2 rounded w-full mb-6" v-model="group_id">
                 <option value="" selected>Guruhni tanlang</option>
-                <option v-for="group in groups" :value="group.id">{{ group.name }}</option>
+                <option v-for="group in groups" :value="group.id" :key="group.id">{{ group.name }}</option>
               </select>
               <div class="mb-6">
                 <Field

@@ -25,11 +25,11 @@ const getOneRoom = async (req, res) => {
 
 const createRoom = async (req, res) => {
   try {
-    const { name, amount, branch_id } = req.body;
+    const { room_name, room_amount, branch_id } = req.body;
     const room = await prisma.rooms.create({
       data: {
-        name: name,
-        amount: amount,
+        name: room_name,
+        amount: room_amount,
         branch_id: branch_id,
       },
     });

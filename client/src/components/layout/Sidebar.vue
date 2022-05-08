@@ -14,7 +14,7 @@
       </router-link>
     </div>
     <ul class="relative mt-5">
-      <li class="relative" v-for="menu of menus">
+      <li class="relative" v-for="menu of menus" :key="menu">
         <MenuItem :menu="menu"/>
       </li>
     </ul>

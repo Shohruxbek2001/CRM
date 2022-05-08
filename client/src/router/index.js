@@ -59,6 +59,11 @@ const routes = [
         component: () => import("../components/pages/Doxod.vue"),
     },
     {
+        path: '/branches',
+        name: 'Branches',
+        component: () => import("../components/pages/BranchesAndRooms.vue"),
+    },
+    {
         path: '/:pathMach(.*)*',
         name: 'NotFound',
         component: () => import("../components/NotFound.vue"),

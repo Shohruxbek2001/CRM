@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white h-14 p-3 sticky-top shadow mb-3 flex justify-between items-center">
-    <div class="font-medium font-bold">{{ page }}</div>
+    <div class="font-bold">{{ page }}</div>
     <div>
       <i class="fa fa-bell px-3 cursor-pointer hover:text-blue-600"></i>
       <strong class="px-3 border-l-2 cursor-pointer hover:text-blue-600 capitalize">{{ userInfo.user.name }}</strong>

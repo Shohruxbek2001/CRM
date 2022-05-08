@@ -25,10 +25,10 @@ const getOneBranch = async (req, res) => {
 
 const createBranch = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { branch_name } = req.body;
     const branch = await prisma.branches.create({
       data: {
-        name: name,
+        name: branch_name,
       },
     });
     res.status(201).json({ message: "Branch Created!", branch });
