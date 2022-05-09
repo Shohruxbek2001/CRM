@@ -4,6 +4,8 @@ import { student } from './student.module'
 import { teacher } from './teacher.module'
 import { branch } from './branch.module'
 import { room } from './room.module'
+import { price } from './price.module'
+import { course } from './course.module'
 
 const store = createStore({
   modules: {
@@ -12,6 +14,8 @@ const store = createStore({
     teacher,
     branch,
     room,
+    price,
+    course,
   },
   state() {
     return {
@@ -24,6 +28,8 @@ const store = createStore({
       groups: [],
       branches: [],
       rooms: [],
+      prices: [],
+      courses: []
     }
   },
   mutations: {
@@ -53,6 +59,12 @@ const store = createStore({
     },
     setRooms(state, data) {
       state.rooms = data
+    },
+    setPrices(state, data) {
+      state.prices = data
+    },
+    setCourses(state, data) {
+      state.courses = data
     },
   },
 })

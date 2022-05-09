@@ -28,7 +28,7 @@ const createPrice = async (req, res) => {
     const { price } = req.body;
     const price_ = await prisma.price_list.create({
       data: {
-        price: price,
+        price: parseFloat(price),
       },
     });
     res.status(201).json({ message: "Price Created!", price_ });

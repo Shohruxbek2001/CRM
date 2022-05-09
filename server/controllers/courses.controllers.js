@@ -26,20 +26,20 @@ const getOneCourse = async (req, res) => {
 const createCourse = async (req, res) => {
   try {
     const {
-      name,
+      course_name,
       duration,
-      price_list_id,
-      per_of_lesson_time,
-      date_of_start,
+      price_id,
+      per_lesson,
+      start_date,
       branch_id,
     } = req.body;
     const course = await prisma.courses.create({
       data: {
-        name: name,
-        duration: duration,
-        price_list_id: price_list_id,
-        per_of_lesson_time: per_of_lesson_time,
-        date_of_start: new Date(date_of_start),
+        name: course_name,
+        duration: Number(duration),
+        price_list_id: price_id,
+        per_of_lesson_time: Number(per_lesson),
+        date_of_start: new Date(start_date),
         branch_id: branch_id,
       },
     });
@@ -52,22 +52,22 @@ const createCourse = async (req, res) => {
 const updateCourse = async (req, res) => {
   try {
     const {
-      name,
+      course_name,
       duration,
-      price_list_id,
-      per_of_lesson_time,
-      date_of_start,
+      price_id,
+      per_lesson,
+      start_date,
       branch_id,
     } = req.body;
     const { id } = req.params;
     const course = await prisma.courses.update({
       where: { id },
       data: {
-        name: name,
-        duration: duration,
-        price_list_id: price_list_id,
-        per_of_lesson_time: per_of_lesson_time,
-        date_of_start: new Date(date_of_start),
+        name: course_name,
+        duration: Number(duration),
+        price_list_id: price_id,
+        per_of_lesson_time: Number(per_lesson),
+        date_of_start: new Date(start_date),
         branch_id: branch_id,
       },
     });
