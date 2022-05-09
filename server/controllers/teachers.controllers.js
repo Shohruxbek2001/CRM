@@ -26,13 +26,20 @@ const getOneTeacher = async (req, res) => {
 const createTeacher = async (req, res) => {
   try {
     let body = req.body;
-    body.password = bcrypt.hashSync(body.password, 10);
-    const teacher = await prisma.teachers.create({
-      data: {
-        ...body,
-      },
+    teacher = await prisma.teachers.findUnique({
+      where: { email: body.email },
     });
-    res.status(201).json({ message: "Teacher Created!", teacher });
+    if (teacher) {
+      res.status(403).json({ message: `Bazada "${body.email}" bunday email mavjud!` });
+    } else {
+      body.password = bcrypt.hashSync(body.password, 10);
+      const teacher = await prisma.teachers.create({
+        data: {
+          ...body,
+        },
+      });
+      res.status(201).json({ message: "Teacher Created!", teacher });
+    }
   } catch (err) {
     res.status(500).json(err);
   }

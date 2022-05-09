@@ -119,9 +119,9 @@ model users {
 
 model teachers {
   id           String        @id @default(uuid()) @db.Uuid
-  firstname    String?       @db.VarChar
-  lastname     String?       @db.VarChar
-  phone_number String?       @db.VarChar
+  firstname    String        @db.VarChar
+  lastname     String        @db.VarChar
+  phone_number String        @db.VarChar
   email        String        @unique @db.VarChar
   password     String        @db.VarChar
   img          String?       @db.VarChar

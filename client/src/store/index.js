@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import { auth } from './auth.module'
 import { student } from './student.module'
+import { teacher } from './teacher.module'
 import { branch } from './branch.module'
 import { room } from './room.module'
 
@@ -8,6 +9,7 @@ const store = createStore({
   modules: {
     auth,
     student,
+    teacher,
     branch,
     room,
   },
@@ -18,6 +20,7 @@ const store = createStore({
       selectedChildPage: '',
       admins: [],
       students: [],
+      teachers: [],
       groups: [],
       branches: [],
       rooms: [],
@@ -38,6 +41,9 @@ const store = createStore({
     },
     setStudents(state, data) {
       state.students = data
+    },
+    setTeachers(state, data) {
+      state.teachers = data
     },
     setGroups(state, data) {
       state.groups = data

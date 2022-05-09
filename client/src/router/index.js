@@ -64,6 +64,11 @@ const routes = [
         component: () => import("../components/pages/BranchesAndRooms.vue"),
     },
     {
+        path: '/teachers',
+        name: 'Teachers',
+        component: () => import("../components/pages/Teachers.vue"),
+    },
+    {
         path: '/:pathMach(.*)*',
         name: 'NotFound',
         component: () => import("../components/NotFound.vue"),
