@@ -74,6 +74,11 @@ const routes = [
     component: () => import('../components/pages/Courses.vue'),
   },
   {
+    path: '/groups',
+    name: 'Groups',
+    component: () => import('../components/pages/Groups.vue'),
+  },
+  {
     path: '/:pathMach(.*)*',
     name: 'NotFound',
     component: () => import('../components/NotFound.vue'),

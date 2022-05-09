@@ -6,6 +6,7 @@ import { branch } from './branch.module'
 import { room } from './room.module'
 import { price } from './price.module'
 import { course } from './course.module'
+import { group } from './group.module'
 
 const store = createStore({
   modules: {
@@ -16,6 +17,7 @@ const store = createStore({
     room,
     price,
     course,
+    group,
   },
   state() {
     return {
@@ -29,7 +31,7 @@ const store = createStore({
       branches: [],
       rooms: [],
       prices: [],
-      courses: []
+      courses: [],
     }
   },
   mutations: {

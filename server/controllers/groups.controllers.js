@@ -25,11 +25,11 @@ const getOneGroup = async (req, res) => {
 
 const createGroup = async (req, res) => {
   try {
-    const { name, days_in_week, course_id, start_date, room_id } = req.body;
+    const { name, days, course_id, start_date, room_id } = req.body;
     const group = await prisma.groups.create({
       data: {
         name: name,
-        days_in_week: days_in_week,
+        days_in_week: days,
         course_id: course_id,
         start_date: new Date(start_date),
         room_id: room_id,
