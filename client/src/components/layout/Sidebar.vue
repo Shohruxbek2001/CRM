@@ -4,46 +4,52 @@
       <router-link to="/">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-full w-10" alt="Avatar"/>
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-full w-10" alt="Avatar" />
           </div>
           <div class="grow ml-3">
-            <p class="text-sm font-semibold text-gray-400 uppercase hover:text-gray-200 transition duration-300 ease-in-out">
-              Admin Dashboard</p>
+            <p class="text-sm font-semibold text-gray-400 uppercase hover:text-gray-200 transition duration-300 ease-in-out">Admin Dashboard</p>
           </div>
         </div>
       </router-link>
     </div>
-    <ul class="relative mt-5">
+    <ul class="relative mt-5" v-if="user.user.role === 'super'">
       <li class="relative" v-for="menu of menus" :key="menu">
-        <MenuItem :menu="menu"/>
+        <MenuItem :menu="menu" />
+      </li>
+    </ul>
+    <ul class="relative mt-5" v-else>
+      <li class="relative" v-for="menu of menus.filter((m) => m.see === 'admin')" :key="menu">
+        <MenuItem :menu="menu" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import MenuItem from "./MenuItem.vue";
+import MenuItem from './MenuItem.vue'
+import $ from 'jquery'
 
 export default {
   data() {
     return {
       menus: [
-        {id: 1, url: "/", icon: "fa-pie-chart", name: "Обзор"},
-        {id: 2, url: "/prognoz", icon: "fa-magnifying-glass-plus", name: "Прогноз выгоды"},
-        {id: 3, url: "/uchet", icon: "fa-coins", name: "Бухгалтерский учет"},
-        {id: 4, url: "/tranzaksiya", icon: "fa-chart-column", name: "Сумма транзакций"},
-        {id: 5, url: "/udachi", icon: "fa-user-plus", name: "Удачи"},
-        {id: 6, url: "/doxod", icon: "fa-sack-dollar", name: "Доход"},
-        {id: 7, url: "/groups", icon: "fa-user-group", name: "Guruhlar"},
-        {id: 8, url: "/branches", icon: "fa-building", name: "Filiallar"},
-        {id: 9, url: "/courses", icon: "fa-book", name: "Kurslar"},
-        {id: 10, url: "/teachers", icon: "fa-chalkboard-user", name: "O'qituvchilar"}
-      ]
+        { id: 1, url: '/', icon: 'fa-pie-chart', name: 'Обзор', see: 'admin' },
+        { id: 2, url: '/prognoz', icon: 'fa-magnifying-glass-plus', name: 'Прогноз выгоды', see: 'super' },
+        { id: 3, url: '/uchet', icon: 'fa-coins', name: 'Бухгалтерский учет', see: 'super' },
+        { id: 4, url: '/tranzaksiya', icon: 'fa-chart-column', name: 'Сумма транзакций', see: 'super' },
+        { id: 5, url: '/udachi', icon: 'fa-user-plus', name: 'Удачи', see: 'admin' },
+        { id: 6, url: '/doxod', icon: 'fa-sack-dollar', name: 'Доход', see: 'super' },
+        { id: 7, url: '/groups', icon: 'fa-user-group', name: 'Guruhlar', see: 'admin' },
+        { id: 8, url: '/branches', icon: 'fa-building', name: 'Filiallar', see: 'super' },
+        { id: 9, url: '/courses', icon: 'fa-book', name: 'Kurslar', see: 'super' },
+        { id: 10, url: '/teachers', icon: 'fa-chalkboard-user', name: "O'qituvchilar", see: 'super' },
+      ],
+      user: $.parseJSON(localStorage.getItem('user')),
     }
   },
   components: {
-    MenuItem
-  }
+    MenuItem,
+  },
 }
 </script>
 
