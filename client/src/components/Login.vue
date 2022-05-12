@@ -15,6 +15,7 @@
           </div>
           <button type="submit" class="text-white bg-blue-700/75 hover:bg-blue-800/100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg w-full px-5 py-4 text-center">Kirish</button>
         </Form>
+        <h1 class="text-white mt-12 text-center">Admin bilan bog'lanish: <a href="tel:+998995640552" class="hover:text-blue-900"><i class="fa fa-phone"></i> +998(99) 564 05 52</a></h1>
       </div>
     </div>
   </div>
