@@ -4,7 +4,12 @@ const prisma = new PrismaClient();
 
 const getAllBranches = async (req, res) => {
   try {
-    const branches = await prisma.branches.findMany();
+    const branches = await prisma.branches.findMany({
+      include: {
+        courses: true,
+        rooms: true
+      }
+    });
     res.status(200).json(branches);
   } catch (err) {
     res.status(500).json(err);

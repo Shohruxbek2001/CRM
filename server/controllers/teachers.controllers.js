@@ -4,7 +4,12 @@ const prisma = new PrismaClient();
 
 const getAllTeachers = async (req, res) => {
   try {
-    const teachers = await prisma.teachers.findMany();
+    const teachers = await prisma.teachers.findMany({
+      include: {
+        address: true,
+        comments: true
+      }
+    });
     res.status(200).json(teachers);
   } catch (err) {
     res.status(500).json(err);

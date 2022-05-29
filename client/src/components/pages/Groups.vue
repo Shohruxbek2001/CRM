@@ -106,7 +106,7 @@ import BranchService from '../../services/branch.service'
 const store = useStore()
 
 const name = ref('')
-const day_in_week = ref('')
+const days = ref('')
 const course_id = ref('')
 const start_date = ref('')
 const room_id = ref('')

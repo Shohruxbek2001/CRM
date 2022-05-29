@@ -5,14 +5,22 @@ const API_URL = 'http://localhost:8000/api/'
 
 class GroupService {
   getAllGroups() {
-    return axios.get(API_URL + 'groups', { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.get(API_URL + 'groups', { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
   createGroup(data) {
-    return axios.post(API_URL + 'groups', { ...data }, { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.post(API_URL + 'groups', { ...data }, { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
 }
 

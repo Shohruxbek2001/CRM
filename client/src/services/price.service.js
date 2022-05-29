@@ -5,15 +5,23 @@ const API_URL = 'http://localhost:8000/api/'
 
 class PriceService {
   getAllPrices() {
-    return axios.get(API_URL + 'prices', { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.get(API_URL + 'prices', { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
 
   createPrice(data) {
-    return axios.post(API_URL + 'prices', { ...data }, { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.post(API_URL + 'prices', { ...data }, { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
 }
 

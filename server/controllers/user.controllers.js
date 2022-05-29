@@ -4,7 +4,14 @@ const prisma = new PrismaClient();
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await prisma.users.findMany();
+    const users = await prisma.users.findMany({
+      include: {
+        comments: true,
+        address: true,
+        payment: true,
+        sertificate: true
+      }
+    });
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json(err);

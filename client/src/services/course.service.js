@@ -5,15 +5,23 @@ const API_URL = 'http://localhost:8000/api/'
 
 class CourseService {
   getAllCourses() {
-    return axios.get(API_URL + 'courses', { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.get(API_URL + 'courses', { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
 
   createCourse(data) {
-    return axios.post(API_URL + 'courses', { ...data }, { headers: authHeader() }).then((response) => {
-      return response.data
-    })
+    try {
+      return axios.post(API_URL + 'courses', { ...data }, { headers: authHeader() }).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
   }
 }
 

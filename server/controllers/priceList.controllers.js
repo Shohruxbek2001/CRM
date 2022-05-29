@@ -4,7 +4,11 @@ const prisma = new PrismaClient();
 
 const getAllPrices = async (req, res) => {
   try {
-    const prices = await prisma.price_list.findMany();
+    const prices = await prisma.price_list.findMany({
+      include: {
+        courses: true
+      }
+    });
     res.status(200).json(prices);
   } catch (err) {
     res.status(500).json(err);

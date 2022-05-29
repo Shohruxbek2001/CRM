@@ -66,12 +66,12 @@
                   </td>
                   <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
                     <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
-                      {{ prices.filter((b) => b.id === course.price_list_id)[0]['price'] }}
+                      {{ prices.filter((b) => b.id === course.price_list_id)[0].price }}
                     </p>
                   </td>
                   <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
                     <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
-                      {{ branches.filter((b) => b.id === course.branch_id)[0]['name'] }}
+                      {{ branches.filter((b) => b.id === course.branch_id)[0].name }}
                     </p>
                   </td>
                   <td class="px-6 py-4 text-right">
