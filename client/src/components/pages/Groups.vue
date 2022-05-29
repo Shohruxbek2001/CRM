@@ -13,12 +13,12 @@
           <ErrorMessage name="start_date" class="error-feedback text-red-600 font-medium" />
           <select name="course" class="border p-2 rounded w-full mb-6" v-model="course_id">
             <option value="" selected>Kursni tanlang</option>
-            <option v-for="course in courses" :value="course.id" :key="course.id">{{ course.name }}</option>
+            <option v-for="(course, index) in courses" :value="course.id" :key="index">{{ course.name }}</option>
           </select>
           <div class="mb-6">
             <select name="room" class="border p-2 rounded w-full mb-6" v-model="room_id">
               <option value="" selected>Xonani tanlang...</option>
-              <option v-for="room in rooms" :value="room.id" :key="room.id">{{ `${room.name} - xona, ${branches.filter((b) => b.id === room.branch_id)[0]['name']} filiali` }}</option>
+              <option v-for="(room, index) in rooms" :value="room.id" :key="index">{{ `${room.name} - xona, ${branches.filter((b) => b.id === room.branch_id)[0]['name']} filiali` }}</option>
             </select>
           </div>
           <div class="flex justify-end">
@@ -27,7 +27,7 @@
         </Form>
         <hr>
         <table class="w-full text-sm text-left text-gray-500">
-          <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+          <thead class="text-xs text-gray-700 uppercase border-b">
             <tr class="text-left">
               <th scope="col" class="px-2 py-3">№</th>
               <th scope="col" class="p-3">Guruh nomi</th>
@@ -39,39 +39,39 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="group of groups" :key="group.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr v-for="(group, index) of groups" :key="index" class="bg-white border-b hover:bg-gray-50">
               <th class="w-13 p-2 text-center">
-                {{ groups.indexOf(group) + 1 }}
+                {{ index + 1 }}
               </th>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ group.name }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ group.start_date.replace('T', " ").slice(0, group.start_date.indexOf(".")) }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <p class="text-sm leading-5 font-medium text-gray-900 ">
                   <ul>
-                    <li v-for="day of group.days_in_week.split(',')" :key="day" class="capitalize">{{day}}</li>
+                    <li v-for="(day, index) of group.days_in_week.split(',')" :key="index" class="capitalize">{{day}}</li>
                   </ul>
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ courses.filter((b) => b.id === group.course_id)[0]['name'] }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ students.filter((b) => b.group_id === group.id).length }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                <ul class="text-sm leading-5 font-bold text-gray-900 dark:text-white">
+              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <ul class="text-sm leading-5 font-bold text-gray-900 ">
                   <li>Filial: {{ branches.filter((b) => b.id === courses.filter((b) => b.id === group.course_id)[0]['branch_id'])[0]['name'] }}</li>
                   <li>Xona: {{ rooms.filter((r) => r.id === group.room_id)[0]['name'] }}</li>
                   <li>Sig'imi: {{ rooms.filter((r) => r.id === group.room_id)[0]['amount'] }}</li>

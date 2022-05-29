@@ -13,12 +13,12 @@
       </router-link>
     </div>
     <ul class="relative mt-5" v-if="user.user.role === 'super'">
-      <li class="relative" v-for="menu of menus" :key="menu">
+      <li class="relative" v-for="(menu, index) of menus" :key="index">
         <MenuItem :menu="menu" />
       </li>
     </ul>
     <ul class="relative mt-5" v-else>
-      <li class="relative" v-for="menu of menus.filter((m) => m.see === 'admin')" :key="menu">
+      <li class="relative" v-for="(menu, index) of menus.filter((m) => m.see === 'admin')" :key="index">
         <MenuItem :menu="menu" />
       </li>
     </ul>

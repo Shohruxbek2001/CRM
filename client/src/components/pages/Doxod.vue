@@ -14,7 +14,7 @@
               деньги в наличе</a>
           </li>
         </ul>
-        <div class="content mt-6" v-for="content of contents" :key="content.id"
+        <div class="content mt-6" v-for="(content, index) of contents" :key="index"
              :class="{'hidden': openTab !== content.id, 'block': openTab ===  content.id}">
           <TabContent :content="content"/>
         </div>

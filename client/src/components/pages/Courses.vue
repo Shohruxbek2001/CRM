@@ -22,12 +22,12 @@
               <label for="price">Kurs narxi</label>
               <select name="price_id" class="border p-2 rounded w-full mb-6" v-model="price_id">
                 <option value="" selected>Kurs narxi...</option>
-                <option v-for="price in prices" :value="price.id" :key="price.id">{{ price.price }}</option>
+                <option v-for="(price, index) in prices" :value="price.id" :key="index">{{ price.price }}</option>
               </select>
               <label for="price">Filial nomi</label>
               <select name="branch_id" class="border p-2 rounded w-full mb-6" v-model="branch_id">
                 <option value="" selected>Filial nomi...</option>
-                <option v-for="branch in branches" :value="branch.id" :key="branch.id">{{ branch.name }}</option>
+                <option v-for="(branch, index) in branches" :value="branch.id" :key="index">{{ branch.name }}</option>
               </select>
               <button type="submit" class="w-72 p-2 mb-3 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Kurs qo'shish</button>
             </Form>
@@ -39,8 +39,8 @@
               <ErrorMessage name="price" class="error-feedback text-red-600 font-medium" />
               <button type="submit" class="w-72 p-2 mb-3 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Qo'shish</button>
             </Form>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-y-auto h-28">
-              <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+            <table class="w-full text-sm text-left text-gray-500 overflow-y-auto h-28">
+              <thead class="text-xs text-gray-700 uppercase border-b">
                 <tr class="text-left">
                   <th scope="col" class="px-2 py-3">№</th>
                   <th scope="col" class="p-3">Kurs nomi</th>
@@ -50,27 +50,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="course of courses" :key="course.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr v-for="(course, index) of courses" :key="index" class="bg-white border-b hover:bg-gray-50">
                   <th class="w-13 p-2 text-center">
-                    {{ courses.indexOf(course) + 1 }}
+                    {{ index + 1 }}
                   </th>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ course.name }}
                     </p>
                   </td>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
-                      {{ course.duration }} oy
-                    </p>
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">{{ course.duration }} oy</p>
                   </td>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ prices.filter((b) => b.id === course.price_list_id)[0].price }}
                     </p>
                   </td>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ branches.filter((b) => b.id === course.branch_id)[0].name }}
                     </p>
                   </td>

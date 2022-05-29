@@ -4,15 +4,15 @@
       <div class="flex items-center justify-between p-3 px-5">
         <p class="Title">Список всех студентов</p>
       </div>
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mb-3">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+      <table class="w-full text-sm text-left text-gray-500 mb-3">
+        <thead class="text-xs text-gray-700 uppercase border-b">
           <tr>
             <th scope="col" class="px-6 py-3">Имя</th>
             <th scope="col" class="px-2 py-3"></th>
           </tr>
         </thead>
         <tbody>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" v-for="student of students" :key="student.id">
+          <tr v-for="(student, index) of students" :key="index" class="bg-white border-b hover:bg-gray-50">
             <TableItem :student="student" />
             <td class="px-6 py-4 text-right">
               <i class="fa fa-pencil cursor-pointer hover:text-blue-600" data-modal-toggle="editStudentModal"></i>

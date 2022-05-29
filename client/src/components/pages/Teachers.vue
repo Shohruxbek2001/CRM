@@ -25,7 +25,7 @@
               </div>
               <select name="group" class="border p-2 rounded w-full mb-6" v-model="group_id">
                 <option value="" selected>Guruhni tanlang</option>
-                <option v-for="group in groups" :value="group.id" :key="group.id">{{ group.name }}</option>
+                <option v-for="(group, index) in groups" :value="group.id" :key="index">{{ group.name }}</option>
               </select>
               <div class="mb-6">
                 <select name="gender" class="border p-2 rounded w-full mb-6" v-model="gender">
@@ -40,8 +40,8 @@
             </Form>
           </div>
           <div>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-y-auto h-28">
-              <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+            <table class="w-full text-sm text-left text-gray-500 overflow-y-auto h-28">
+              <thead class="text-xs text-gray-700 uppercase border-b">
                 <tr class="text-left">
                   <th scope="col" class="px-2 py-3">№</th>
                   <th scope="col" class="p-3">O'qituvchi nomi</th>
@@ -50,22 +50,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="teacher of teachers" :key="teacher.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr v-for="(teacher, index) of teachers" :key="index" class="bg-white border-b hover:bg-gray-50">
                   <th class="w-13 p-2 text-center">
-                    {{ teachers.indexOf(teacher) + 1 }}
+                    {{ index + 1 }}
                   </th>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ teacher.firstname + ' ' + teacher.lastname }}
                     </p>
                   </td>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ teacher.phone_number }}
                     </p>
                   </td>
-                  <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                    <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                  <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                    <p class="text-sm leading-5 font-medium text-gray-900">
                       {{ groups.filter((b) => b.id === teacher.group_id)[0]['name'] }}
                     </p>
                   </td>

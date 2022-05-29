@@ -69,5 +69,8 @@ const store = createStore({
       state.courses = data
     },
   },
+  getters: {
+    allGroups: (state) => state.groups
+  }
 })
 export default store

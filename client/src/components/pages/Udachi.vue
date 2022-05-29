@@ -21,7 +21,7 @@
               </div>
               <select name="group" class="border p-2 rounded w-full mb-6" v-model="group_id">
                 <option value="" selected>Guruhni tanlang</option>
-                <option v-for="group in groups" :value="group.id" :key="group.id">{{ group.name }}</option>
+                <option v-for="(group, index) in groups" :value="index" :key="index">{{ group.name }}</option>
               </select>
               <div class="mb-6">
                 <Field name="phone_number" id="phone_number" type="phone" placeholder="+998 90 012 34 67" v-model="phone_number" class="border rounded block p-2 outline-0 mb-4 w-full" />

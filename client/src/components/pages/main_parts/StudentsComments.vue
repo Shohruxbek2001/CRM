@@ -21,8 +21,8 @@
           </div>
         </div>
       </div>
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mb-3">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+      <table class="w-full text-sm text-left text-gray-500  mb-3">
+        <thead class="text-xs text-gray-700 uppercase  border-b">
           <tr>
             <th scope="col" class="px-6 py-3">Список, Тема</th>
             <th scope="col" class="px-6 py-3">Имя</th>
@@ -32,28 +32,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" v-for="comment of comments" :key="comment.id">
+          <tr class="bg-white border-b hover:bg-gray-50" v-for="(comment, index) of comments" :key="index">
             <TableItem :comment="comment" />
             <td class="p-4">
               <div class="ml-2 inline-block">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                <p class="text-sm leading-5 font-medium text-gray-900">
                   {{ comment.name }}
                 </p>
-                <p class="text-sm leading-5 text-gray-300 dark:text-gray-400">до {{ comment.userDate }}</p>
+                <p class="text-sm leading-5 text-gray-300 ">до {{ comment.userDate }}</p>
               </div>
             </td>
             <td class="p-4">
               <div class="ml-2 inline-block">
-                <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                <p class="text-sm leading-5 font-medium text-gray-900">
                   {{ comment.date }}
                 </p>
-                <p class="text-sm leading-5 text-gray-300 dark:text-gray-400">
+                <p class="text-sm leading-5 text-gray-300 ">
                   {{ comment.time }}
                 </p>
               </div>
             </td>
             <td class="p-5">
-              <span class="bg-orange-500 px-4 text-white text-xs font-semibold mr-2 py-1.5 rounded-3xl dark:bg-blue-200 dark:text-blue-800">
+              <span class="bg-orange-500 px-4 text-white text-xs font-semibold mr-2 py-1.5 rounded-3xl">
                 {{ comment.priority }}
               </span>
             </td>

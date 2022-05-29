@@ -13,19 +13,19 @@
               <button type="submit" class="w-72 p-2 mb-3 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Fillial qo'shish</button>
               <hr />
               <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+                <thead class="text-xs text-gray-700 uppercase">
                   <tr class="text-center">
                     <th scope="col" class="px-2 py-3">№</th>
                     <th scope="col" class="px-6 py-3">Filial nomi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="branch of branches" :key="branch.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr v-for="(branch, index) of branches" :key="index" class="bg-white border-b hover:bg-gray-50">
                     <th class="w-13 p-2 text-center">
                       {{ branches.indexOf(branch) + 1 }}
                     </th>
-                    <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                      <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                    <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                      <p class="text-sm leading-5 font-medium text-gray-900">
                         {{ branch.name }}
                       </p>
                     </td>
@@ -47,12 +47,12 @@
               <label for="branch">Filial nomi</label><br />
               <select name="branch" v-model="branch_id" class="border p-2 rounded w-full mb-6">
                 <option value="" selected>Tanlang...</option>
-                <option v-for="branch in branches" :value="branch.id" :key="branch.id">{{ branch.name }}</option>
+                <option v-for="(branch, index) in branches" :value="index" :key="branch.id">{{ branch.name }}</option>
               </select>
               <button type="submit" class="w-72 p-2 mb-3 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Xona qo'shish</button>
               <hr />
-              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-y-auto h-28">
-                <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 border-b">
+              <table class="w-full text-sm text-left text-gray-500 overflow-y-auto h-28">
+                <thead class="text-xs text-gray-700 uppercase border-b">
                   <tr class="text-center">
                     <th scope="col" class="px-2 py-3">№</th>
                     <th scope="col" class="px-6 py-3">Xona nomi</th>
@@ -61,22 +61,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="room of rooms" :key="room.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr v-for="(room, index) of rooms" :key="index" class="bg-white border-b hover:bg-gray-50">
                     <th class="w-13 p-2 text-center">
-                      {{ rooms.indexOf(room) + 1 }}
+                      {{ index + 1 }}
                     </th>
-                    <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                      <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                    <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                      <p class="text-sm leading-5 font-medium text-gray-900">
                         {{ room.name }}
                       </p>
                     </td>
-                    <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                      <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                    <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                      <p class="text-sm leading-5 font-medium text-gray-900">
                         {{ room.amount }}
                       </p>
                     </td>
-                    <td scope="row" class="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-left">
-                      <p class="text-sm leading-5 font-medium text-gray-900 dark:text-white">
+                    <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+                      <p class="text-sm leading-5 font-medium text-gray-900">
                         {{ branches.filter((b) => b.id === room.branch_id)[0]['name'] }}
                       </p>
                     </td>
@@ -165,7 +165,7 @@ const onSubmitRoom = (room) => {
     room.room_amount = Number(room.room_amount)
     room = {
       ...room,
-      branch_id: branch_id.value
+      branch_id: branch_id.value,
     }
     store.dispatch('room/create', room).then(
       () => {
