@@ -7,16 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model address {
-  id         String  @id @default(uuid()) @db.Uuid
-  name       String  @db.VarChar
-  region     String  @db.VarChar
-  user_id    String  @db.Uuid
-  teacher_id String  @db.Uuid
-  users      users   @relation(fields: [user_id], references: [id])
-  teachers   teachers  @relation(fields: [teacher_id], references: [id])
-}
-
 model branches {
   id      String    @id @default(uuid()) @db.Uuid
   name    String    @db.VarChar
@@ -24,14 +14,19 @@ model branches {
   rooms   rooms[]
 }
 
-model comments {
-  id      String @id @default(uuid()) @db.Uuid
-  rate    Float  @default(0)
-  content String @db.VarChar
-  user_id String @db.Uuid
-  users   users  @relation(fields: [user_id], references: [id])
-  teacher_id String @db.Uuid
-  teachers   teachers  @relation(fields: [teacher_id], references: [id])
+model rooms {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar
+  amount    Int
+  branch_id String   @db.Uuid
+  branches  branches @relation(fields: [branch_id], references: [id])
+  groups    groups[]
+}
+
+model price_list {
+  id      String    @id @default(uuid()) @db.Uuid
+  price   Float
+  courses courses[]
 }
 
 model courses {
@@ -47,6 +42,39 @@ model courses {
   groups             groups[]
 }
 
+model groups {
+  id           String     @id @default(uuid()) @db.Uuid
+  name         String     @db.VarChar
+  days_in_week String     @db.VarChar
+  course_id    String     @db.Uuid
+  start_date   DateTime   @db.Timestamp
+  room_id      String     @db.Uuid
+  courses      courses    @relation(fields: [course_id], references: [id])
+  rooms        rooms      @relation(fields: [room_id], references: [id])
+  users        users[]
+  teachers     teachers[]
+}
+
+model comments {
+  id         String   @id @default(uuid()) @db.Uuid
+  rate       Float    @default(0)
+  content    String   @db.VarChar
+  user_id    String   @db.Uuid
+  users      users    @relation(fields: [user_id], references: [id])
+  teacher_id String   @db.Uuid
+  teachers   teachers @relation(fields: [teacher_id], references: [id])
+}
+
+model address {
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String   @db.VarChar
+  region     String   @db.VarChar
+  user_id    String   @db.Uuid
+  teacher_id String   @db.Uuid
+  users      users    @relation(fields: [user_id], references: [id])
+  teachers   teachers @relation(fields: [teacher_id], references: [id])
+}
+
 model forecast {
   id                String   @id @default(uuid()) @db.Uuid
   name              String   @db.VarChar
@@ -55,39 +83,11 @@ model forecast {
   date_of_forecast  DateTime @db.Timestamp
 }
 
-model groups {
-  id           String   @id @default(uuid()) @db.Uuid
-  name         String   @db.VarChar
-  days_in_week String   @db.VarChar
-  course_id    String   @db.Uuid
-  start_date   DateTime @db.Timestamp
-  room_id      String   @db.Uuid
-  courses      courses  @relation(fields: [course_id], references: [id])
-  rooms        rooms    @relation(fields: [room_id], references: [id])
-  users        users[]
-  teachers     teachers[]
-}
-
 model payment {
   id              String   @id @default(uuid()) @db.Uuid
   date_of_payment DateTime @db.Timestamp
   user_id         String   @db.Uuid
   users           users    @relation(fields: [user_id], references: [id])
-}
-
-model price_list {
-  id      String    @id @default(uuid()) @db.Uuid
-  price   Float
-  courses courses[]
-}
-
-model rooms {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String   @db.VarChar
-  amount    Int
-  branch_id String   @db.Uuid
-  branches  branches @relation(fields: [branch_id], references: [id])
-  groups    groups[]
 }
 
 model sertificate {
@@ -98,37 +98,37 @@ model sertificate {
 }
 
 model users {
-  id           String        @id @default(uuid()) @db.Uuid
-  firstname    String        @db.VarChar
-  lastname     String        @db.VarChar
-  phone_number String?       @db.VarChar
-  email        String        @unique @db.VarChar
-  password     String        @db.VarChar
-  img          String?       @db.VarChar
-  created_at   DateTime      @default(now())
-  gender       String        @db.VarChar
-  group_id     String        @db.Uuid
-  parent_fullname String     @db.VarChar
-  parent_phone_number String @db.VarChar
-  groups       groups        @relation(fields: [group_id], references: [id])
-  address      address[]
-  comments     comments[]
-  payment      payment[]
-  sertificate  sertificate[]
+  id                  String        @id @default(uuid()) @db.Uuid
+  firstname           String        @db.VarChar
+  lastname            String        @db.VarChar
+  phone_number        String?       @db.VarChar
+  email               String        @unique @db.VarChar
+  password            String        @db.VarChar
+  img                 String?       @db.VarChar
+  created_at          DateTime      @default(now())
+  gender              String        @db.VarChar
+  group_id            String        @db.Uuid
+  parent_fullname     String        @db.VarChar
+  parent_phone_number String        @db.VarChar
+  groups              groups        @relation(fields: [group_id], references: [id])
+  address             address[]
+  comments            comments[]
+  payment             payment[]
+  sertificate         sertificate[]
 }
 
 model teachers {
-  id           String        @id @default(uuid()) @db.Uuid
-  firstname    String        @db.VarChar
-  lastname     String        @db.VarChar
-  phone_number String        @db.VarChar
-  email        String        @unique @db.VarChar
-  password     String        @db.VarChar
-  img          String?       @db.VarChar
-  created_at   DateTime      @default(now())
-  gender       String        @db.VarChar
-  group_id     String        @db.Uuid
-  groups       groups        @relation(fields: [group_id], references: [id])
+  id           String     @id @default(uuid()) @db.Uuid
+  firstname    String     @db.VarChar
+  lastname     String     @db.VarChar
+  phone_number String     @db.VarChar
+  email        String     @unique @db.VarChar
+  password     String     @db.VarChar
+  img          String?    @db.VarChar
+  created_at   DateTime   @default(now())
+  gender       String     @db.VarChar
+  group_id     String     @db.Uuid
+  groups       groups     @relation(fields: [group_id], references: [id])
   address      address[]
   comments     comments[]
 }

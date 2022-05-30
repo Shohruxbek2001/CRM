@@ -6,6 +6,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const helmet = require("helmet");
 const { authUser, authRole } = require("./middlewares/auth");
+const {
+  createBranch,
+  createPrice,
+  createRoom,
+  createCourse,
+  createGroup,
+} = require("./middlewares/fillDatabase");
 
 require("dotenv").config();
 PORT = process.env.PORT || 8000;
@@ -19,6 +26,14 @@ app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// * Fill Database
+
+createBranch();
+createRoom();
+createPrice();
+createCourse();
+createGroup();
 
 // * Import Routes
 
@@ -37,14 +52,29 @@ const priceListRoutes = require("./routes/priceList.routes");
 
 // * Only Super admin have access routes
 app.use("/api/admins", authUser, authRole(["super"]), adminRoutes);
-app.use("/api/forecasts", authUser, authRole(["super", "admin"]), forecastsRoutes);
+app.use(
+  "/api/forecasts",
+  authUser,
+  authRole(["super", "admin"]),
+  forecastsRoutes
+);
 app.use("/api/courses", authUser, authRole(["super", "admin"]), coursesRoutes);
-app.use("/api/teachers", authUser, authRole(["super", "admin"]), teachersRoutes);
+app.use(
+  "/api/teachers",
+  authUser,
+  authRole(["super", "admin"]),
+  teachersRoutes
+);
 app.use("/api/prices", authUser, authRole(["super", "admin"]), priceListRoutes);
 
 // * Only admin have access routes
 app.use("/api/address", authUser, authRole(["super", "admin"]), addressRoutes);
-app.use("/api/branches", authUser, authRole(["super", "admin"]), branchesRoutes);
+app.use(
+  "/api/branches",
+  authUser,
+  authRole(["super", "admin"]),
+  branchesRoutes
+);
 app.use("/api/rooms", authUser, authRole(["super", "admin"]), roomsRoutes);
 app.use("/api/groups", authUser, authRole(["super", "admin"]), groupsRoutes);
 app.use("/api/users", authUser, authRole(["super", "admin"]), usersRoutes);
@@ -74,7 +104,8 @@ app.post("/login", async (req, res) => {
     }
   } catch (err) {
     return res.status(500).json({
-      message: "Serverda xatoliq yuzaga keldi, iltimos qaytadan harakat qilib ko'ring!",
+      message:
+        "Serverda xatoliq yuzaga keldi, iltimos qaytadan harakat qilib ko'ring!",
     });
   }
 });
