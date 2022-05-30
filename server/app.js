@@ -37,10 +37,10 @@ const priceListRoutes = require("./routes/priceList.routes");
 
 // * Only Super admin have access routes
 app.use("/api/admins", authUser, authRole(["super"]), adminRoutes);
-app.use("/api/forecasts", authUser, authRole(["super"]), forecastsRoutes);
-app.use("/api/courses", authUser, authRole(["super"]), coursesRoutes);
-app.use("/api/teachers", authUser, authRole(["super"]), teachersRoutes);
-app.use("/api/prices", authUser, authRole(["super"]), priceListRoutes);
+app.use("/api/forecasts", authUser, authRole(["super", "admin"]), forecastsRoutes);
+app.use("/api/courses", authUser, authRole(["super", "admin"]), coursesRoutes);
+app.use("/api/teachers", authUser, authRole(["super", "admin"]), teachersRoutes);
+app.use("/api/prices", authUser, authRole(["super", "admin"]), priceListRoutes);
 
 // * Only admin have access routes
 app.use("/api/address", authUser, authRole(["super", "admin"]), addressRoutes);
