@@ -23,6 +23,17 @@ class StudentService {
       throw error
     }
   }
+
+  updateStudent(data) {
+    try {
+      let group_id = data.group_id
+      return axios.put(API_URL + 'users/' + data.id, { group_id }, { headers: authHeader()}).then((response) => {
+        return response.data
+      })
+    } catch (error) {
+      throw error
+    }
+  }  
 }
 
 export default new StudentService()

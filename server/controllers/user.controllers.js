@@ -9,8 +9,8 @@ const getAllUsers = async (req, res) => {
         comments: true,
         address: true,
         payment: true,
-        sertificate: true
-      }
+        sertificate: true,
+      },
     });
     res.status(200).json(users);
   } catch (err) {
@@ -32,8 +32,19 @@ const getOneUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const {firstname, lastname, phone_number, email, password,
-      img, gender, group_id, parent_fullname, parent_phone_number} = req.body;
+    const {
+      firstname,
+      lastname,
+      phone_number,
+      email,
+      password,
+      img,
+      gender,
+      group_id,
+      parent_fullname,
+      parent_phone_number,
+    } = req.body;
+    let leadGroupId = await prisma.groups.findMany();
     const user = await prisma.users.create({
       data: {
         firstname,
@@ -43,9 +54,9 @@ const createUser = async (req, res) => {
         password: bcrypt.hashSync(password, 10),
         img,
         gender,
-        group_id,
+        group_id: group_id || leadGroupId.filter(g => g.name === "Lead")[0].id,
         parent_fullname,
-        parent_phone_number
+        parent_phone_number,
       },
     });
     res.status(201).json({ message: "User Created!", user });
@@ -57,12 +68,11 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let body = req.body;
-    body.password = bcrypt.hashSync(body.password, 10);
     const { id } = req.params;
     const User = await prisma.users.update({
-      where: { id },
+      where: { id: id },
       data: {
-        ...body
+        ...body,
       },
     });
     res.status(200).json({ message: "User Updated!", User });

@@ -49,6 +49,7 @@ model groups {
   course_id    String     @db.Uuid
   start_date   DateTime   @db.Timestamp
   room_id      String     @db.Uuid
+  archive      Boolean    @db.Boolean @default(false)
   courses      courses    @relation(fields: [course_id], references: [id])
   rooms        rooms      @relation(fields: [room_id], references: [id])
   users        users[]

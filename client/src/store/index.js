@@ -23,6 +23,7 @@ const store = createStore({
     return {
       isLogin: false,
       selectedPage: '',
+      selectedStudent: {},
       selectedChildPage: '',
       admins: [],
       students: [],
@@ -43,6 +44,9 @@ const store = createStore({
     },
     setSelectedPage(state, page) {
       state.selectedPage = page
+    },
+    setSelectedStudent(state, student) {
+      state.selectedStudent = student
     },
     setAdmins(state, data) {
       state.admins = data
