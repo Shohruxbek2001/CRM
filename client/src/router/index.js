@@ -79,6 +79,11 @@ const routes = [
     component: () => import('../components/pages/Groups.vue'),
   },
   {
+    path: '/admins',
+    name: 'Admins',
+    component: () => import('../components/pages/Admins.vue'),
+  },
+  {
     path: '/:pathMach(.*)*',
     name: 'NotFound',
     component: () => import('../components/NotFound.vue'),

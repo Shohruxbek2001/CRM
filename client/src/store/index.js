@@ -7,6 +7,7 @@ import { room } from './room.module'
 import { price } from './price.module'
 import { course } from './course.module'
 import { group } from './group.module'
+import { admin } from './admin.module'
 
 const store = createStore({
   modules: {
@@ -18,6 +19,7 @@ const store = createStore({
     price,
     course,
     group,
+    admin
   },
   state() {
     return {

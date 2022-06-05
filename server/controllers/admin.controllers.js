@@ -26,16 +26,27 @@ const getOneAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
-    const { name, email, password, role_id } = req.body;
-    const admin = await prisma.admins.create({
-      data: {
-        name: name,
+    const { name, email, password } = req.body;
+    const dbemail = await prisma.admins.findUnique({
+      where: {
         email: email,
-        password: bcrypt.hashSync(password, 10),
-        role_id: role_id
       },
     });
-    res.status(201).json({ message: "Admin Created!", admin });
+    if (dbemail) {
+      res.status(500).json({
+        message: "Bu email allaqachon bazada mavjud!",
+      });
+    } else {
+      const admin = await prisma.admins.create({
+        data: {
+          name: name || "Admin",
+          email: email,
+          password: bcrypt.hashSync(password, 10),
+          role: "admin",
+        },
+      });
+      res.status(201).json({ message: "Admin Created!", admin });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -48,7 +59,7 @@ const updateAdmin = async (req, res) => {
     const Admin = await prisma.admins.update({
       where: { id },
       data: {
-        ...body
+        ...body,
       },
     });
     res.status(200).json({ message: "Admin Updated!", Admin });
@@ -61,7 +72,7 @@ const deleteAdmin = async (req, res) => {
   try {
     const { id } = req.params;
     const admin = await prisma.admins.delete({
-      where: { id }
+      where: { id },
     });
     res.status(200).json({ message: "Admin Deleted!", admin });
   } catch (err) {

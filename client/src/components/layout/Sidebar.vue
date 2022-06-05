@@ -43,6 +43,7 @@ export default {
         { id: 8, url: '/branches', icon: 'fa-building', name: 'Filiallar', see: 'admin' },
         { id: 9, url: '/courses', icon: 'fa-book', name: 'Kurslar', see: 'admin' },
         { id: 10, url: '/teachers', icon: 'fa-chalkboard-user', name: "O'qituvchilar", see: 'admin' },
+        { id: 11, url: '/admins', icon: 'fa-user-admin', name: "Adminlar", see: 'super' },
       ],
       user: $.parseJSON(localStorage.getItem('user')),
     }
