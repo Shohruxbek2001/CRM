@@ -15,7 +15,7 @@
           <tr v-for="(student, index) of students" :key="index" class="bg-white border-b hover:bg-gray-50">
             <TableItem :student="student" />
             <td class="px-6 py-4 text-right">
-              <i class="fa fa-pencil cursor-pointer hover:text-blue-600"></i>
+              <i class="fa fa-user-pen cursor-pointer hover:text-blue-600"></i>
               <i @click="openModal(student)" title="Add to group" class="fa fa-folder-plus cursor-pointer hover:text-orange-600 ml-2"></i>
             </td>
           </tr>

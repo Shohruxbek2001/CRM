@@ -37,7 +37,7 @@
                 </p>
               </td>
               <td class="px-6 py-4 text-right">
-                <i class="fa fa-pencil cursor-pointer hover:text-blue-600" data-modal-toggle="editStudentModal"></i>
+                <i class="fa fa-user-pen cursor-pointer hover:text-blue-600" data-modal-toggle="editStudentModal"></i>
                 <i title="Add archive" class="fa fa-archive cursor-pointer hover:text-orange-600 ml-2"></i>
               </td>
             </tr>
@@ -80,8 +80,8 @@
                   <option value="female" selected>Ayol</option>
                 </select>
               </div>
-              <div class="flex justify-end">
-                <button type="submit" class="w-72 p-2 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Qo'shish</button>
+              <div class="flex">
+                <button type="submit" class="w-full p-2 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Qo'shish</button>
               </div>
             </Form>
           </div>

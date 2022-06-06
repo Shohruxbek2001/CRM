@@ -3,7 +3,7 @@
     <div class="border-2 shadow rounded-lg">
       <div class="flex justify-between items-center p-3">
         <h1 class="font-bold text-2xl">Admin boshqaruvi</h1>
-        <i @click="openModal()" class="fa fa-user-plus cursor-pointer">1</i>
+        <i @click="openModal()" class="fa fa-user-plus cursor-pointer"></i>
       </div>
       <hr />
       <div class="p-3">
@@ -21,8 +21,8 @@
               <td class="px-6 text-xl text-black">{{ index + 1 }}</td>
               <TableItem :admin="admin" />
               <td class="p-4 text-right">
-                <i class="fa fa-pencil cursor-pointer hover:text-blue-600"></i>
-                <i @click="onDelete(admin.id)" title="Delete Admin" class="fa fa-trash cursor-pointer hover:text-red-600 ml-2">d</i>
+                <i class="fa fa-user-pen cursor-pointer hover:text-blue-600"></i>
+                <i @click="onDelete(admin.id)" title="Delete Admin" class="fa fa-trash cursor-pointer hover:text-red-600 ml-2"></i>
               </td>
             </tr>
           </tbody>
@@ -47,8 +47,8 @@
                 <Field name="password" type="password" placeholder="password" v-model="password" class="border rounded block p-2 outline-0 mb-4 w-full" />
                 <ErrorMessage name="password" class="error-feedback text-red-600 font-medium" />
               </div>
-              <div class="flex justify-end">
-                <button type="submit" class="w-72 p-2 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Qo'shish</button>
+              <div class="flex">
+                <button type="submit" class="w-full p-2 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Qo'shish</button>
               </div>
             </Form>
           </div>

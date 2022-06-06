@@ -5,7 +5,7 @@
                data-mdb-ripple="true"
                data-mdb-ripple-color="primary"
   >
-    <span class="font-medium"><i class="fa mr-3" :class="menu.icon"></i>{{ menu.name }}</span>
+    <span class="font-medium"><i class="fa w-8" :class="menu.icon"></i>{{ menu.name }}</span>
   </router-link>
 </template>
 

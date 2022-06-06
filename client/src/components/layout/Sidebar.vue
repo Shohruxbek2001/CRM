@@ -33,17 +33,17 @@ export default {
   data() {
     return {
       menus: [
-        { id: 1, url: '/', icon: 'fa-pie-chart', name: 'Обзор', see: 'admin' },
+        { id: 1, url: '/', icon: 'fa-pie-chart', name: 'Bosh sahifa', see: 'admin' },
         { id: 2, url: '/prognoz', icon: 'fa-magnifying-glass-plus', name: 'Прогноз выгоды', see: 'super' },
-        { id: 3, url: '/uchet', icon: 'fa-coins', name: 'Бухгалтерский учет', see: 'super' },
-        { id: 4, url: '/tranzaksiya', icon: 'fa-chart-column', name: 'Сумма транзакций', see: 'admin' },
-        { id: 5, url: '/udachi', icon: 'fa-user-plus', name: 'Удачи', see: 'admin' },
+        { id: 3, url: '/uchet', icon: 'fa-coins', name: 'Hisobot', see: 'super' },
+        { id: 4, url: '/tranzaksiya', icon: 'fa-chart-column', name: 'Pul aylanmasi', see: 'admin' },
+        { id: 5, url: '/udachi', icon: 'fa-user-plus', name: 'O`quvchilar', see: 'admin' },
         { id: 6, url: '/doxod', icon: 'fa-sack-dollar', name: 'Доход', see: 'admin' },
         { id: 7, url: '/groups', icon: 'fa-user-group', name: 'Guruhlar', see: 'admin' },
         { id: 8, url: '/branches', icon: 'fa-building', name: 'Filiallar', see: 'admin' },
         { id: 9, url: '/courses', icon: 'fa-book', name: 'Kurslar', see: 'admin' },
         { id: 10, url: '/teachers', icon: 'fa-chalkboard-user', name: "O'qituvchilar", see: 'admin' },
-        { id: 11, url: '/admins', icon: 'fa-user-admin', name: "Adminlar", see: 'super' },
+        { id: 11, url: '/admins', icon: 'fa-user-tie', name: "Adminlar", see: 'super' },
       ],
       user: $.parseJSON(localStorage.getItem('user')),
     }
