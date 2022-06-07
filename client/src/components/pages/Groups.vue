@@ -35,7 +35,6 @@
               <th scope="col" class="p-3">Dars kunlari</th>
               <th scope="col" class="p-3">Kurs nomi</th>
               <th scope="col" class="p-3">O`quvchilar soni</th>
-              <th scope="col" class="p-3">Joylashuv</th>
             </tr>
           </thead>
           <tbody>
@@ -62,20 +61,13 @@
               </td>
               <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
-                  {{ courses.filter((b) => b.id === group.course_id)[0]['name'] }}
+                  {{ courses.map((b) => b.id === group.course_id ? b.name : null).filter(i => i !== null)[0] }}
                 </p>
               </td>
               <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ students.filter((b) => b.group_id === group.id).length }}
                 </p>
-              </td>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
-                <ul class="text-sm leading-5 font-bold text-gray-900 ">
-                  <li>Filial: {{ branches.filter((b) => b.id === courses.filter((b) => b.id === group.course_id)[0]['branch_id'])[0]['name'] }}</li>
-                  <li>Xona: {{ rooms.filter((r) => r.id === group.room_id)[0]['name'] }}</li>
-                  <li>Sig'imi: {{ rooms.filter((r) => r.id === group.room_id)[0]['amount'] }}</li>
-                </ul>
               </td>
               <td class="px-6 py-4 text-right">
                 <i class="fa fa-pencil cursor-pointer hover:text-blue-600" data-modal-toggle="editStudentModal"></i>
@@ -95,8 +87,7 @@ import * as yup from 'yup'
 import { useStore } from 'vuex'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
-import { ref } from 'vue'
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import GroupService from '../../services/group.service'
 import RoomService from '../../services/room.service'
 import CourseService from '../../services/course.service'
@@ -141,12 +132,12 @@ const addStudentsInStore = () => {
 const addBranchesInStore = () => {
   BranchService.getAllBranches().then((data) => store.commit('setBranches', data))
 }
-onMounted(() => {
+onBeforeMount(() => {
   addGroupsInStore()
-  addRoomsInStore()
-  addCoursesInStore()
-  addStudentsInStore()
   addBranchesInStore()
+  addCoursesInStore()
+  addRoomsInStore()
+  addStudentsInStore()
 })
 
 const schema = yup.object().shape({

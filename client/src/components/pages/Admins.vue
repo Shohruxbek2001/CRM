@@ -63,7 +63,7 @@ import { ErrorMessage, Field, Form } from 'vee-validate'
 import * as yup from 'yup'
 import { useStore } from 'vuex'
 import 'izitoast/dist/css/iziToast.min.css'
-import { computed, onMounted, reactive } from 'vue'
+import { computed, onBeforeMount, reactive } from 'vue'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import TableItem from '../pages/main_parts/Table/TableItemForAdmins.vue'
@@ -96,7 +96,7 @@ const openModal = (student) => {
 const closeModal = () => {
   $('#popup-modal').addClass('hidden')
 }
-onMounted(() => {
+onBeforeMount(() => {
   addAdminsInStore()
 })
 const onSubmit = (admin) => {

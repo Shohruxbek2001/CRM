@@ -39,6 +39,24 @@
               <ErrorMessage name="parent_fullname" class="error-feedback text-red-600 font-medium" />
               <Field name="parent_phone_number" id="parent_phone_number" type="phone" placeholder="Ota-onaning telefon raqamini kiriting..." v-model="parent_phone_number" class="border rounded block p-2 outline-0 mb-4 w-full" />
               <ErrorMessage name="parent_phone_number" class="error-feedback text-red-600 font-medium" />
+              <div class="flex justify-end">
+                <div class="actions flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+                  <div class="flex justify-center items-center hidden">
+                    <i class="fa-solid fa-user-pen hover:text-blue-600 mr-2"></i>
+                    <i class="fa-solid fa-trash hover:text-red-600 mr-2"></i>
+                  </div>
+                  <i @click="openActions(this)" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <div class="actions flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+                  <div class="flex justify-center items-center hidden">
+                    <i class="fa-solid fa-user-pen hover:text-blue-600 mr-2"></i>
+                    <i class="fa-solid fa-trash hover:text-red-600 mr-2"></i>
+                  </div>
+                  <i @click="openActions()" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+                </div>
+              </div>
             </div>
           </div>
           <div class="flex justify-end">
@@ -54,6 +72,7 @@
 import { ErrorMessage, Field, Form } from 'vee-validate'
 import * as yup from 'yup'
 import { useStore } from 'vuex'
+import $ from 'jquery'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { ref } from 'vue'
@@ -83,6 +102,12 @@ const addGroupsInStore = () => {
 onMounted(() => {
   addGroupsInStore()
 })
+
+function openActions() {
+  $('.actions > i').toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
+  $('.actions').toggleClass('w-11').toggleClass('w-28').toggleClass('shadow')
+  $('.actions > div').toggleClass('hidden')
+}
 
 const schema = yup.object().shape({
   parent_fullname: yup.string().required('Iltimos. Ota-onaning ismini kitiring!'),

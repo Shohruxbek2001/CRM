@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.0-alpha.41",
+    "@vuelidate/validators": "^2.0.0-alpha.29",
     "apexcharts": "^3.35.0",
     "axios": "^0.26.1",
     "chart.js": "^3.7.1",

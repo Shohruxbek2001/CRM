@@ -32,12 +32,12 @@
               </td>
               <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900">
-                  {{ prices.filter((b) => b.id === course.price_list_id)[0].price }}
+                  {{ prices.map((b) => b.id === course.price_list_id ? b.price : null).filter((b) => b !== null)[0] }} so'm
                 </p>
               </td>
               <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900">
-                  {{ branches.filter((b) => b.id === course.branch_id)[0].name }}
+                  {{ branches.map((b) => b.id === course.branch_id ? b.name : null).filter((b) => b !== null)[0] }}
                 </p>
               </td>
               <td class="px-6 py-4 text-right">
@@ -114,8 +114,7 @@ import { useStore } from 'vuex'
 import $ from 'jquery'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
-import { ref } from 'vue'
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import BranchService from '../../services/branch.service'
 import PriceService from '../../services/price.service'
 import CourseService from '../../services/course.service'
@@ -155,7 +154,7 @@ const addCoursesInStore = () => {
   CourseService.getAllCourses().then((data) => store.commit('setCourses', data))
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   addBranchesInStore(), addPricesInStore(), addCoursesInStore()
 })
 
