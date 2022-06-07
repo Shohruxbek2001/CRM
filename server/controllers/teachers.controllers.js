@@ -37,7 +37,9 @@ const createTeacher = async (req, res) => {
     if (teacher) {
       res.status(403).json({ message: `Bazada "${body.email}" bunday email mavjud!` });
     } else {
+      let leadGroupId = await prisma.groups.findMany();
       body.password = bcrypt.hashSync(body.password, 10);
+      body.group_id = body.group_id || leadGroupId.filter(g => g.name === "Lead")[0].id
       const teacher = await prisma.teachers.create({
         data: {
           ...body,

@@ -148,12 +148,7 @@ const schema = yup.object().shape({
 })
 
 const onSubmit = (teacher) => {
-  if (group_id.value === '') {
-    iziToast.error({
-      message: 'Iltimos, guruhni tanlang!',
-      position: 'topRight',
-    })
-  } else if (gender.value === '') {
+  if (gender.value === '') {
     iziToast.error({
       message: 'Iltimos, jinsni tanlang!',
       position: 'topRight',
