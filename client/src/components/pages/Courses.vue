@@ -88,12 +88,15 @@
                 </select>
                 <button type="submit" class="w-full p-2 mb-3 text-center block bg-green-500 text-white rounded text-xl hover:bg-green-600 focus:border focus:border-gray-600">Kurs qo'shish</button>
               </Form>
-              <hr>
+              <hr />
             </div>
             <div>
               <Form @submit="onSubmitPrice" :validation-schema="priceSchema" class="mt-3">
                 <label for="price_">Narx</label>
-                <div class="flex justify-start items-center"><Field name="price" type="text" placeholder="350000,00" v-model="price" class="border block p-2 outline-0 w-52" /> <button type="submit" class="w-14 p-1 text-center block bg-blue-500 text-white rounded text-3xl hover:bg-blue-600 focus:border focus:border-gray-600">+</button></div>
+                <div class="flex justify-start items-center">
+                  <Field name="price" type="text" placeholder="350000,00" v-model="price" class="border block p-2 outline-0 w-52" />
+                  <button type="submit" class="w-14 p-1 text-center block bg-blue-500 text-white rounded text-3xl hover:bg-blue-600 focus:border focus:border-gray-600">+</button>
+                </div>
                 <ErrorMessage name="price" class="error-feedback text-red-600 font-medium" />
               </Form>
             </div>

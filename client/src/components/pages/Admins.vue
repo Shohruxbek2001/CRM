@@ -63,7 +63,7 @@ import { ErrorMessage, Field, Form } from 'vee-validate'
 import * as yup from 'yup'
 import { useStore } from 'vuex'
 import 'izitoast/dist/css/iziToast.min.css'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import TableItem from '../pages/main_parts/Table/TableItemForAdmins.vue'
@@ -72,13 +72,16 @@ import AdminService from '../../services/admin.service'
 
 const store = useStore()
 
-const name = ref('')
-const email = ref('')
-const password = ref('')
-
-const schema = yup.object().shape({
-  email: yup.string().required('Iltimos. Emailni kitiring!'),
-  password: yup.string().required('Iltimos. Parolni kitiring!'),
+const data = reactive({
+  admins: [],
+  name: '',
+  email: '',
+  password: '',
+  schema: yup.object().shape({
+    firstname: yup.string().required('Ism kiriting...'),
+    email: yup.string().email('Email not valid').required('Email kiriting...'),
+    password: yup.string().required('Parol kiriting...')
+  })
 })
 
 const admins = computed(() => {
@@ -103,6 +106,9 @@ const onSubmit = (admin) => {
         message: 'Admin muvaffaqiyatli qo`shildi!',
         position: 'topRight',
       })
+      data.name = ''
+      data.email = ''
+      data.password = ''
       addAdminsInStore()
       closeModal()
     },
