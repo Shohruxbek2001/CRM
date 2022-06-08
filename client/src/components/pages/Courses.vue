@@ -129,7 +129,7 @@ const start_date = ref('')
 const price = ref('')
 const branch_id = ref('')
 
-const openModal = (student) => {
+const openModal = () => {
   $('#popup-modal').removeClass('hidden')
 }
 const closeModal = () => {

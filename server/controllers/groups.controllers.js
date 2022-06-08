@@ -7,8 +7,8 @@ const getAllGroups = async (req, res) => {
     const groups = await prisma.groups.findMany({
       include: {
         users: true,
-        teachers: true
-      }
+        teachers: true,
+      },
     });
     res.status(200).json(groups);
   } catch (err) {
@@ -30,7 +30,7 @@ const getOneGroup = async (req, res) => {
 
 const createGroup = async (req, res) => {
   try {
-    const { name, days, course_id, start_date, room_id } = req.body;
+    const { name, days, course_id, start_date, room_id, teacher_id } = req.body;
     const group = await prisma.groups.create({
       data: {
         name: name,
@@ -41,6 +41,20 @@ const createGroup = async (req, res) => {
       },
     });
     res.status(201).json({ message: "Group Created!", group });
+    if (teacher_id !== "" && group) {
+      const teacher = await prisma.teachers.findUnique({
+        where: {
+          id: teacher_id,
+        },
+      });
+      teacher.group_id = group.id;
+      const updatedTeacher = await prisma.teachers.update({
+        where: { id: teacher_id },
+        data: {
+          ...teacher,
+        },
+      });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
