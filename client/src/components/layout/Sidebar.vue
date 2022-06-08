@@ -40,7 +40,7 @@ export default {
         { id: 5, url: '/udachi', icon: 'fa-user-plus', name: 'O`quvchilar', see: 'admin' },
         { id: 6, url: '/doxod', icon: 'fa-sack-dollar', name: 'Daromad', see: 'admin' },
         { id: 7, url: '/groups', icon: 'fa-user-group', name: 'Guruhlar', see: 'admin' },
-        { id: 8, url: '/branches', icon: 'fa-building', name: 'Filiallar', see: 'admin' },
+        { id: 8, url: '/branches', icon: 'fa-building', name: 'Filiallar va xonalar', see: 'admin' },
         { id: 9, url: '/courses', icon: 'fa-book', name: 'Kurslar', see: 'admin' },
         { id: 10, url: '/teachers', icon: 'fa-chalkboard-user', name: "O'qituvchilar", see: 'admin' },
         { id: 11, url: '/admins', icon: 'fa-user-tie', name: "Adminlar", see: 'super' },
