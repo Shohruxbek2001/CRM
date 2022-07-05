@@ -21,19 +21,19 @@
               <th class="text-center">
                 {{ index + 1 }}
               </th>
-              <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+              <td class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900">
                   {{ teacher.firstname + ' ' + teacher.lastname }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+              <td class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900">
                   {{ teacher.phone_number }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
+              <td class="p-4 font-medium text-gray-900 whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900">
-                  {{ groups.filter((b) => b.id === teacher.group_id)[0]['name'] }}
+                  {{ groups.map((b) => b.id === teacher.group_id ? b.name : null).filter(aa => aa !== null)[0] }}
                 </p>
               </td>
               <td class="px-6 py-4 text-right">
@@ -122,7 +122,7 @@ const groups = computed(() => {
 const teachers = computed(() => {
   return store.state.teachers
 })
-const openModal = (student) => {
+const openModal = () => {
   $('#popup-modal').removeClass('hidden')
 }
 const closeModal = () => {

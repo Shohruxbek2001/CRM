@@ -9,13 +9,13 @@
       <div class="p-3 px-5">
         <div class="flex justify-end">
           <div class="inline-flex rounded-md shadow-sm">
-            <a href="#" aria-current="page" class="py-2 px-4 text-sm font-medium text-blue-700 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+            <a @click="showAllGroups" href="#" aria-current="page" class="py-2 px-4 text-sm font-medium text-blue-700 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
               Hammasi
             </a>
-            <a href="#" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+            <a @click="showAllGroupsWithTeacher" href="#" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
               O'qituvchiga biriktirilgan
             </a>
-            <a href="#" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+            <a @click="showAllGroupsWithoutTeacher" href="#" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
               Biriktirilmagan
             </a>
           </div>
@@ -37,29 +37,29 @@
               <th class="w-13 p-2 text-center">
                 {{ index + 1 }}
               </th>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+              <td  class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ group.name }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+              <td  class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ group.start_date.replace('T', " ").slice(0, group.start_date.indexOf(".")) }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
-                <p class="text-sm leading-5 font-medium text-gray-900 ">
+              <td  class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+                <div class="text-sm leading-5 font-medium text-gray-900 ">
                   <ul>
                     <li v-for="(day, index) of group.days_in_week.split(',')" :key="index" class="capitalize">{{day}}</li>
                   </ul>
-                </p>
+                </div>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+              <td  class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ courses.map((b) => b.id === group.course_id ? b.name : null).filter(i => i !== null)[0] }}
                 </p>
               </td>
-              <td scope="row" class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
+              <td  class="p-4 font-medium text-gray-900  whitespace-nowrap text-left">
                 <p class="text-sm leading-5 font-medium text-gray-900 ">
                   {{ students.filter((b) => b.group_id === group.id).length }}
                 </p>
