@@ -1,3 +1,4 @@
 /server/node_modules
+/telegramBot/node_modules
 .vscode
 .idea
